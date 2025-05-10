@@ -5,6 +5,10 @@ import verbRoutes from './db/routesVerb.js';
 
 const app = express();
 
+app.use(cors({ origin: true, credentials: true }));
+app.use('/verbs', verbRoutes);
+app.use(express.json());
+
 app.use(express.urlencoded({extended:true}))
 
 app.get('/v1', (_, res) => {
@@ -17,8 +21,6 @@ app.get('/', (_, res) => {
   res.send('Welcome to the Back-End!');
 });
 
-app.use('/verbs', verbRoutes);
-app.use(cors());
-app.use(express.json());
+
 
 export default app;
