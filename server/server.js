@@ -1,14 +1,24 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import cors from 'cors';
-import verbs from './routes/verb.js';
+import verbRoutes from './db/routesVerb.js';
+import app from './express.js'
 
-const PORT = process.env.PORT || 5050;
-const app = express();
+dotenv.config();
 
-app.use(cors())
-app.use(express.json())
-app.use('/verbs', verbs)
+// const app = express();
+const port = process.env.PORT;
+// app.use(cors());
+// app.use(express.json());
 
-app.listen(PORT, () => {
-   console.log(`Server is listening on port ${PORT}`)
+
+mongoose.connect(process.env.MONGO_URI)
+   .then(() => console.log('Connected to MongoDB'))
+   .catch((err) => console.error(err));
+
+// app.use('/verbs', verbRoutes);
+
+app.listen(port, () => {
+   console.log(`Server is running on ${port}`);
 });
