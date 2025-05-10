@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Verb } from './modelVerbs.js';
 
 const getAllVerbs = async (req, res) => {
