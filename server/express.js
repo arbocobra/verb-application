@@ -21,6 +21,12 @@ app.get('/', (_, res) => {
   res.send('Welcome to the Back-End!');
 });
 
+// app.use('/', express.static('public'));
+
+// app.get('/*',function (req,res){
+//   res.sendFile(path.join(__dirname,'../public','index.html'))
+// });
+
 
 
 export default app;
