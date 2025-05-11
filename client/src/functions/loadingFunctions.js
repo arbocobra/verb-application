@@ -1,5 +1,5 @@
 export const selectData = (tense, verbs) => {
-   fetch('http://localhost:5050/verbs')
+   fetch('http://localhost:5050/api/verbs')
       .then(response => {
          if (!response.ok) { throw new Error(`HTTP error! Status: ${response.status}`); }
          return response.json();

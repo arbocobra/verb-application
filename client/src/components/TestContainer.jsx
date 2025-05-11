@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import React, { useState, useEffect, useRef } from 'react';
-import { selectData } from '../functions/loadingFunctions'
+// import { selectData } from '../functions/loadingFunctions'
+import.meta.env.VITE_API_URL;
 // import { useSelector, useDispatch } from 'react-redux';
 // import { selectShuffledIds, selectNextQuestion, setQuestion, addCorrect, addIncorrect } from '../app/verbsSlice';
 
@@ -10,7 +12,7 @@ import { selectData } from '../functions/loadingFunctions'
 
 const TestContainer = (props) => {
    const { setDisplayQuestion, tenseFilter, verbFilter } = props
-
+   
    const [testIndexList, setTestIndexList] = useState([])
    const [activeIndex, setActiveIndex] = useState(0)
    const [testActive, setTestActive] = useState(true)
@@ -18,7 +20,7 @@ const TestContainer = (props) => {
    const [testQuestions, setTestQuestions] = useState([])
 
    useEffect(() => {
-      fetch('http://localhost:5050/verbs')
+      fetch(process.env.VITE_API_URL)
       .then(response => {
          if (!response.ok) { throw new Error(`HTTP error! Status: ${response.status}`); }
          return response.json();
@@ -41,7 +43,10 @@ const TestContainer = (props) => {
          }
          return results
       })
-      .then(data => setTestQuestions(data))
+      .then(data => {
+         console.log(data)
+         setTestQuestions(data)
+      })
    }, [])
 
    useEffect(() => {
