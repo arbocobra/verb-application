@@ -61,16 +61,6 @@ const Selection = (props) => {
    //       setSelectedTense(arr)
    //    }
    // }
-   const tempContainer = {
-      display: 'flex',
-      gap: '20px'
-   }
-
-   const tempBox = {
-      display: 'flex',
-      flexFlow: 'column nowrap',
-      gap: '20px'
-   }
 
    const submitSelection = (event) => {
       event.preventDefault()
@@ -78,8 +68,8 @@ const Selection = (props) => {
    }
 
    return (
-      <div style={tempContainer} className='selection-container'>
-         <div style={tempBox} className='selection-box'>
+      <div className='selection-container'>
+         <div className='selection-box'>
             <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} />
             <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} />
          </div>

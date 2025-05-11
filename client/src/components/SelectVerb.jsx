@@ -42,17 +42,20 @@ const SelectVerb = (props) => {
    }
 
    return (
-         <div id='selection' className='selection-container'>
-               <div className='selection-input' id='input-all'>
-                  <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
-                  <label htmlFor='verb0'> All</label>
-               </div>
-               {verbSelection.current.map((tense,i) => (
-                  <div key={`checkbox${i}`}>
-                     <input className='auto-checkbox, verb-checkbox' type='checkbox' id={`verb-${i + 1}`} value={tense} onChange={handleCheckbox} />
-                     <label htmlFor={`verb-${i + 1}`}> {tense}</label>
+         <div id='selection'>
+            <h3>Select Verbs to Practice</h3>
+               <div className='selection-options'>
+                  <div className='selection-input' id='input-all'>
+                     <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
+                     <label htmlFor='verb0'> All</label>
                   </div>
-               ))}
+                  {verbSelection.current.map((tense,i) => (
+                     <div key={`checkbox${i}`}>
+                        <input className='auto-checkbox, verb-checkbox' type='checkbox' id={`verb-${i + 1}`} value={tense} onChange={handleCheckbox} />
+                        <label htmlFor={`verb-${i + 1}`}> {tense}</label>
+                     </div>
+                  ))}
+               </div>
          </div>
    )
 }

@@ -4,18 +4,18 @@ import TestContainer from './TestContainer';
 
 const Verbs = () => {
 
-   const [displayQuestion, setDisplayQuestion] = useState(false)
+   const [displayActive, setDisplayActive] = useState(false)
    const [tenseFilter, setTenseFilter] = useState(['all']) // update name
    const [verbFilter, setVerbFilter] = useState(['all']) 
 
    const updatePage = () => {
       document.getElementById('selection').classList.add('hidden')
-      setDisplayQuestion(true)
+      setDisplayActive(true)
    }
 
    return (
       <div id='verbs'>
-         { displayQuestion ? <TestContainer setDisplayQuestion={setDisplayQuestion} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
+         { displayActive ? <TestContainer setDisplayActive={setDisplayActive} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
       </div>
    )
 }
