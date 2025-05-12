@@ -11,7 +11,7 @@ const Question = (props) => {
 
 
    // const {verb, index, display, handleAnswer} = props
-   // const [correct, setCorrect] = useState(null)
+   const [correct, setCorrect] = useState(null)
 
    // const isCorrectText = () => {
    //    if (correct === null) return null
@@ -63,13 +63,29 @@ const Question = (props) => {
    //    }
    // }
 
+   const checkAnswer = (submitted, correct) => {
+  if (submitted === correct) return 0
+  else {
+    const normalizeSubmit = removeDiacritics(submitted)
+    const normalizeCorrect = removeDiacritics(correct)
+    if (normalizeSubmit === normalizeCorrect) return 1
+    else return 2
+    }
+   }
+
+   const removeDiacritics = str => {
+   return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+
    if (display && verb) {
       return (
          <div id='question-container' className='question-box'>
             <div className='question-container'>
                <div className='question-text'>
                   {verb.tense === 'imperative' ? `${verb.conjugationE}!` : `${verb.pronounE} ${verb.conjugationE}`}
-
                </div>
                <Answer verb={verb} handleResponse={handleResponse} />
             </div>

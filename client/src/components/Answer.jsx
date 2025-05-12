@@ -16,7 +16,7 @@ const Answer = (props) => {
       if (e.key === 'Enter') {
          e.preventDefault();
          const clearCaps = e.target.value.toLowerCase()
-         handleResponse()
+         handleResponse(true, clearCaps)
          // handleSubmit(clearCaps)
          clearText(e.target)
        }
