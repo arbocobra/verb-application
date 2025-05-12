@@ -13,7 +13,7 @@ const port = process.env.PORT;
 // app.use(express.json());
 
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGO_URI)
    .then(() => console.log('Connected to MongoDB'))
    .catch((err) => console.error(err));
 
