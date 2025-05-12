@@ -92,7 +92,7 @@ const Selection = (props) => {
                      <label htmlFor={`tense${i}`}> {_.upperFirst(tense)}</label>
                   </div>
                ))} */}
-               <div ref={selectButtonRef} className='button'>Begin Test</div>
+               <div ref={selectButtonRef} className='button md'>Begin Test</div>
          {/* </div> */}
          {/* <div className='selection-container'>
                <div className='selection-input' id='input-all'>

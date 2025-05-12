@@ -4,7 +4,7 @@ import.meta.env.VITE_API_URL;
 
 import Question from './Question';
 // import Results from './Results';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 
 const TestContainer = (props) => {
@@ -84,7 +84,7 @@ const TestContainer = (props) => {
    useEffect(() => {
       console.log('useEffect => countIndex')
       if (testIndexList.length > 0 && countIndex == testIndexList.length) {
-         setDisplayActive(false)
+         completeTest()
       } 
    }, [countIndex])
 
@@ -100,21 +100,19 @@ const TestContainer = (props) => {
       
    }
 
-   // const completeTest = () => {
-   //    setTestActive(false)
-   //    finalQuestion.current = false
-
-   // }
+   const completeTest = () => {
+      setTestActive(false)
+      // finalQuestion.current = false
+   }
 
    if (testActive && initializeRandomize.current) {
       return (
       <div id='test' className='test-container'>
-         Question Loaded
          <Question display={true} verb={testQuestions[testIndexList[countIndex]]} handleResponse={handleResponse} />
          {/* <div id='question-container' className='question-box'>
             <Question verb={currentQuestion} index={activeIndex} display={true} handleAnswer={handleAnswer} key={activeIndex} />
-         </div> 
-         <Footer activeId={activeIndex} testLength={questionIdArray.length} completeTest={completeTest} /> */}
+         </div> */}
+         <Footer activeId={countIndex} testLength={testIndexList.length} completeTest={completeTest} /> 
       </div>
    )} else if (testActive) {
       return (
