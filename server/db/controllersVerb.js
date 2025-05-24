@@ -10,15 +10,27 @@ const getAllVerbs = async (req, res) => {
    }
 }
 
-const getVerbsById = async(req, res) => {
-   const { id } = req.params;
+const getFilteredVerbs = async(req, res) => {
    try {
-      const verb = await Verb.findById(id);
-      if (!user) {
-         return res.status(404).json({ error: 'Cound not find Id' });
+      const { tense, infinitiveP } = req.query;
+      let query = {}
+
+      if (tense !== undefined) {
+         const tenseArray = tense.split(',').map(decodeURIComponent);
+         query.tense = { $in: tenseArray }   
       }
-      res.status(200).json(user);      
-   } catch (err) { res.status(500).json({error: 'I broke'}); }
+      
+      if (infinitiveP !== undefined) {
+         const infinitiveArray = infinitiveP.split(',').map(decodeURIComponent);
+         query.infinitiveP = { $in: infinitiveArray }
+      }
+
+      const data = await Verb.find(query)
+      res.status(200).json(data)
+   } catch (error) {
+        console.error("Error fetching tasks:", error);
+        res.status(500).json({ message: "Server Error" });
+   }
 }
 
-export { getAllVerbs, getVerbsById }
+export { getAllVerbs, getFilteredVerbs }
