@@ -1,41 +1,29 @@
 import { useEffect, useState } from 'react';
 import Answer from './Answer';
 import Hints from './Hints';
-// import { checkAnswer } from '../functions/questionFunctions';
+import { checkAnswer } from '../functions/responseFunctions';
 
 import checkMark from './../assets/check.svg'
 import xMark from './../assets/incorrect.svg'
 import exclamationMark from './../assets/exclamation.svg'
 
 const Question = (props) => {
-   const {display, verb, handleResponse} = props
-   const { conjugationE, conjugationP, infinitiveE, infinitiveP, innerID, pronounE, pronounP, tense } = verb
+   const {display, index, verb, handleResponse} = props
+   const { conjugationE, conjugationP, infinitiveE, infinitiveP, innerId, pronounE, pronounP, tense } = verb
+   const fullP = `${pronounP} ${conjugationP}`
+   // const fullE = `${pronounE} ${conjugationE}`
 
    // const {verb, index, display, handleAnswer} = props
    const [correct, setCorrect] = useState(null)
    
+   useEffect(() => setCorrect(null), [index])
 
-   // const isCorrectText = () => {
-   //    if (correct === null) return null
-   //    else if (correct === 0) return null
-   //    else if (correct === 1) return (
-   //       <div className='result'>
-   //          <p>{`(wrong accent) - ${verb.fullP}`}</p>
-   //       </div>
-   //    )
-   //    else if (correct === 2) return (
-   //       <div className='result'>
-   //          <p>{verb.fullP}</p>
-   //       </div>
-   //    )
-   // }
-
-   // const responseIcon = () => {
-   //    if (correct === null) return null
-   //    else if (correct === 0) return checkMark
-   //    else if (correct === 1) return exclamationMark
-   //    else if (correct === 2) return xMark
-   // }
+   const responseIcon = () => {
+      if (correct === null) return null
+      else if (correct === 0) return checkMark
+      else if (correct === 1) return exclamationMark
+      else if (correct === 2) return xMark
+   }
    // // const responseIcon = setIcon()
 
    // const isCorrectIcon = () => {
@@ -55,32 +43,15 @@ const Question = (props) => {
       const result = checkAnswer(val, verb.conjugationP)
       if (result === 0) { // is correct
          setCorrect(result)
-         // setTimeout(() => handleAnswer(true), 1000)
+         setTimeout(() => handleResponse(true, fullP), 1000)
       } else if (result === 1) { // correct but wrong accent
          setCorrect(result)
-         // setTimeout(() => handleAnswer(false), 2500)
+         setTimeout(() => handleResponse(false, fullP), 2500)
       } else if (result === 2) { // incorrect
          setCorrect(result)
-         // setTimeout(() => handleAnswer(false), 2500)
+         setTimeout(() => handleResponse(false, fullP), 2500)
       }
    }
-
-   const checkAnswer = (submitted, correct) => {
-      if (submitted === correct) return 0
-      else {
-         const normalizeSubmit = removeDiacritics(submitted)
-         const normalizeCorrect = removeDiacritics(correct)
-         if (normalizeSubmit === normalizeCorrect) return 1
-         else return 2
-      }
-   }
-
-   const removeDiacritics = str => {
-   return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-}
-
 
    if (display && verb) {
       return (
@@ -89,9 +60,10 @@ const Question = (props) => {
                <div className='question-text'>
                   {tense === 'imperative' ? `${conjugationE}!` : `${pronounE} ${conjugationE}`}
                </div>
-               <Answer verb={verb} handleResponse={handleResponse} />
+               <Answer index={index} verb={verb} handleSubmit={handleSubmit} responseIcon={responseIcon()} />
+               <Response val={correct} correctResponse={fullP} />
             </div>
-            <Hints innerID={innerID} infinitiveP={infinitiveP} tense={tense} />
+            <Hints index={index} innerId={innerId} infinitiveP={infinitiveP} tense={tense} />
          </div>
          // <>
          //    <div id={`question-${index}`} className='question-container'>
@@ -107,6 +79,29 @@ const Question = (props) => {
       )
    } else return null
    
+}
+
+const Response = (props) => {
+   const {val, correctResponse} = props
+
+   if (val === null) return (
+      <div className='result'></div>
+   )
+   else if (val=== 0) return (
+      <div className='result'>
+         <p>Correct</p>
+      </div>
+   )
+   else if (val === 1) return (
+      <div className='result'>
+         <p>{`(wrong accent) - ${correctResponse}`}</p>
+      </div>
+   )
+   else if (val === 2) return (
+      <div className='result'>
+         <p>{correctResponse}</p>
+      </div>
+   )
 }
 
 export default Question
