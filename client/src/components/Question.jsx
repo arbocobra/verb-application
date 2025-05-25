@@ -13,9 +13,9 @@ const Question = (props) => {
    const fullP = `${pronounP} ${conjugationP}`
    // const fullE = `${pronounE} ${conjugationE}`
 
-   // const {verb, index, display, handleAnswer} = props
-   const [correct, setCorrect] = useState(null)
-   
+   // const {verb, index, display, handleAnswer} = props 
+   const [correct, setCorrect] = useState(null) 
+    
    useEffect(() => setCorrect(null), [index])
 
    const responseIcon = () => {
