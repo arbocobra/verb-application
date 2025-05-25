@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { selectHints } from '../functions/loadingFunctions'
 
 const Hints = (props) => {
@@ -26,14 +26,6 @@ const Hints = (props) => {
          }
       }
    }, [index])
-
-   // useEffect(() => {
-   //    const divArr = document.getElementsByClassName('hint-title')
-   //    for (let div of divArr) {
-   //       let divContents = div.nextElementSibling
-   //       div.addEventListener('click', () => divContents.classList.toggle('hidden'))
-   //    }
-   // },[])
    
    return (
       <div className='hint-container'>

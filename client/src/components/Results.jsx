@@ -1,23 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-
 const Results = (props) => {
    const { totalQuestions, resetTest, results } = props
-
-   // const dispatch = useDispatch()
-   // const mistakes = useSelector(selectFinalResults)
    const resultsButtonRef = useRef(null)
 
    useEffect(() => {
       resultsButtonRef.current.addEventListener('click', handleReset)
    }, [])
 
-   const handleReset = () => {
-      // dispatch(resetTest())
-      // setDisplayQuestion(false)
-      
-      resetTest()
-   }
+   const handleReset = () => resetTest()
 
    const correctCount = results.correct.length
    const incorrectCount = results.incorrect.length
@@ -47,7 +38,6 @@ const Results = (props) => {
          </div>
       </div>
    )
-
 }
 
 export default Results

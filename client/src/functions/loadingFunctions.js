@@ -1,13 +1,5 @@
 /* eslint-disable no-undef */
-import axios from 'axios';
 import.meta.env.VITE_API_URL;
-
-export const selectData = () => {
-   axios.get(`${process.env.VITE_API_URL}/api/verbs`)
-      .then((response) => data = response.data)
-      .catch((error) => console.log(error))
-      .finally(() => {console.log(data)})
-}
 
 export const selectHints = async (tense, verb) => {
    try {
@@ -43,7 +35,6 @@ export const selectFilteredData = async (tense, infinitives) => {
       })
       if (!response.ok) throw new Error(`HTTP error - Status: ${response.status}`);
       const data = await response.json();
-      // console.log(data)
       return data
    } catch (error) {
       console.error('Fetch Error.', error)

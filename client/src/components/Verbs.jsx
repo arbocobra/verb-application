@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Selection from './Selection';
 import TestContainer from './TestContainer';
 
 const Verbs = () => {
 
    const [displayActive, setDisplayActive] = useState(false)
-   const [tenseFilter, setTenseFilter] = useState(['all']) // update name
+   const [tenseFilter, setTenseFilter] = useState(['all'])
    const [verbFilter, setVerbFilter] = useState(['all']) 
 
    const updatePage = () => {

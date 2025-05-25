@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Answer from './Answer';
 import Hints from './Hints';
+import Response from './Response';
 import { checkAnswer } from '../functions/responseFunctions';
 
 import checkMark from './../assets/check.svg'
@@ -9,13 +10,12 @@ import exclamationMark from './../assets/exclamation.svg'
 
 const Question = (props) => {
    const {display, index, verb, handleResponse} = props
+
    const { conjugationE, conjugationP, infinitiveE, infinitiveP, innerId, pronounE, pronounP, tense } = verb
    const fullP = `${pronounP} ${conjugationP}`
-   // const fullE = `${pronounE} ${conjugationE}`
 
-   // const {verb, index, display, handleAnswer} = props 
    const [correct, setCorrect] = useState(null) 
-    
+
    useEffect(() => setCorrect(null), [index])
 
    const responseIcon = () => {
@@ -24,20 +24,6 @@ const Question = (props) => {
       else if (correct === 1) return exclamationMark
       else if (correct === 2) return xMark
    }
-   // // const responseIcon = setIcon()
-
-   // const isCorrectIcon = () => {
-   //    if (correct === null) return null
-   //    else if (correct === 0) return (
-   //       <div className='icon green'><span>&#10004;</span></div>
-   //    )
-   //    else if (correct === 1) return (
-   //       <div className='icon red'><span>&#10071;&#10071;</span></div>
-   //    )
-   //    else if (correct === 2) return (
-   //       <div className='icon red'><span>&#10006;</span></div>
-   //    )
-   // }
 
    const handleSubmit = (val) => {
       const result = checkAnswer(val, verb.conjugationP)
@@ -65,43 +51,8 @@ const Question = (props) => {
             </div>
             <Hints index={index} innerId={innerId} infinitiveP={infinitiveP} tense={tense} />
          </div>
-         // <>
-         //    <div id={`question-${index}`} className='question-container'>
-         //       <div className='question-text'>
-         //          <p>{verb.fullE}</p>
-         //       </div>
-         //       {/* <Answer verb={verb} index={index} handleSubmit={handleSubmit} responseIcon={responseIcon()} /> */}
-         //       {/* {isCorrectIcon()} */}
-         //       {isCorrectText()}
-         //    </div>
-         //    {/* <Hint verb={verb} index={index} /> */}
-         // </>
       )
    } else return null
-   
-}
-
-const Response = (props) => {
-   const {val, correctResponse} = props
-
-   if (val === null) return (
-      <div className='result'></div>
-   )
-   else if (val=== 0) return (
-      <div className='result'>
-         <p>Correct</p>
-      </div>
-   )
-   else if (val === 1) return (
-      <div className='result'>
-         <p>{`(wrong accent) - ${correctResponse}`}</p>
-      </div>
-   )
-   else if (val === 2) return (
-      <div className='result'>
-         <p>{correctResponse}</p>
-      </div>
-   )
 }
 
 export default Question

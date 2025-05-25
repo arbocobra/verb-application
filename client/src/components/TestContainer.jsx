@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { useState, useEffect, useRef } from 'react';
 import { PropagateLoader } from 'react-spinners';
-import { selectData, selectFilteredData, randomizeQuestionIndex } from './../functions/loadingFunctions';
+import { selectFilteredData, randomizeQuestionIndex } from './../functions/loadingFunctions';
 import.meta.env.VITE_API_URL;
 
 import Question from './Question';
@@ -26,11 +26,10 @@ const TestContainer = (props) => {
    const finalQuestion = useRef(false)
 
    useEffect(() => {
-      console.log('useEffect => init')
       if (!initializeData.current) {
          initializeData.current = true
          loadData()
-      }      
+      }
    }, [])
 
    const loadData = () => {      
@@ -42,7 +41,6 @@ const TestContainer = (props) => {
    }
 
    useEffect(() => {
-      console.log('useEffect => testQuestions')
       if (testQuestions.length > 0 && !initializeRandomize.current) {
          initializeRandomize.current = true
          randomizeIndex()
@@ -74,13 +72,10 @@ const TestContainer = (props) => {
       }
       if (finalQuestion.current) completeTest()
       setCountIndex(countRef.current + 1)
-      // nextQuestionIndex()
-      
    }
 
    const completeTest = () => {
       setTestActive(false)
-      // finalQuestion.current = false
    }
 
    const resetTest = () => {
@@ -95,20 +90,12 @@ const TestContainer = (props) => {
 
    if (testActive && initializeRandomize.current) {
       return (
-      <div id='test' className='test-container'>
+      <div id='question-container' className='question-box'>
          <Question display={true} index={countIndex} verb={testQuestions[testIndexList[countIndex]]} handleResponse={handleResponse} />
-         {/* <div id='question-container' className='question-box'>
-            <Question verb={currentQuestion} index={activeIndex} display={true} handleAnswer={handleAnswer} key={activeIndex} />
-         </div> */}
          <Footer activeId={countIndex} testLength={testIndexList.length} completeTest={completeTest} /> 
       </div>
-   )} else if (testActive) {
-      return (
-         // <div>Current test index not defined</div>
-         <PropagateLoader/>
-      )
-   } else return <Results totalQuestions={testIndexList.length} resetTest={resetTest} results={results} />
-   // } else return (<div>I finished</div>)
+   )} else if (testActive) return <PropagateLoader/>
+   else return <Results totalQuestions={testIndexList.length} resetTest={resetTest} results={results} />
 }
 
 export default TestContainer
