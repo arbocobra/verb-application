@@ -6,10 +6,14 @@ const Answer = (props) => {
 
    const inputRef = useRef(null);
 
+   // useEffect(() => {
+   //    inputRef.current.addEventListener('keyup', pressEnter)
+   //    inputRef.current.focus()
+   // }, [index])
+
    useEffect(() => {
-      inputRef.current.addEventListener('keyup', pressEnter)
       inputRef.current.focus()
-   }, [index])
+   }, [])
 
    const pressEnter = (e) => {
       if (e.key === 'Enter') {
@@ -17,7 +21,7 @@ const Answer = (props) => {
          const clearCaps = e.target.value.toLowerCase()
          handleSubmit(clearCaps)
          clearText(e.target)
-         inputRef.current.removeEventListener('keyup', pressEnter)
+         // inputRef.current.removeEventListener('keyup', pressEnter)
        }
    }
 
@@ -33,17 +37,17 @@ const Answer = (props) => {
    if (verb.tense === 'imperative') {
       return (
          <div className='answer-container'>
-            <input ref={inputRef} className='answer-input' type='text' />
+            <input ref={inputRef} onKeyUp={pressEnter} className='answer-input' maxLength='19' type='text' />
             <div className='pronoun imperative'>{`-${verb.pronounP}`}</div>
             <div className='icon'>{icon}</div>
-            <AccentKeys typeAccent={typeAccent} />
+            <AccentKeyboard typeAccent={typeAccent} />
          </div>
       )
    } else {
       return (
          <div className='answer-container'>
             <div className='pronoun'>{verb.pronounP}</div>
-            <input ref={inputRef} className='answer-input' maxLength='20' type='text' />
+            <input ref={inputRef} onKeyUp={pressEnter} className='answer-input' maxLength='19' type='text' />
             <div className='icon'>{icon}</div>
             <AccentKeyboard typeAccent={typeAccent} />
          </div>

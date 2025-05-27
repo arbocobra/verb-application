@@ -4,10 +4,11 @@ const AccentKeyboard = (props) => {
    const { typeAccent } = props
 
    const initializeKeyboard = useRef(false)
+   const keyboardRef = useRef(null)
 
    useEffect(() => {
       if (!initializeKeyboard.current){
-         const div = document.getElementById('keyboard')
+         const div = keyboardRef.current
          let divContents = div.nextElementSibling
          div.addEventListener('click', () => divContents.classList.toggle('hidden'))
          initializeKeyboard.current = true
@@ -17,7 +18,7 @@ const AccentKeyboard = (props) => {
    return (
       <div className='keyboard-container'>
          <div className='keyboard-box'>
-            <div id='keyboard' className='keyboard-title'>Use Accent Keyboard</div>
+            <div ref={keyboardRef} className='keyboard-title'>Use Accent Keyboard</div>
             <div className='keyboard-contents hidden'>
                <button className='key' type='button' onClick={()=> typeAccent('á')}>á</button>
                <button className='key' type='button' onClick={()=> typeAccent('â')}>â</button>

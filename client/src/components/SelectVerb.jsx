@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const SelectVerb = (props) => {
-   const {verbFilter, setVerbFilter} = props
+   const {verbFilter, setVerbFilter, toggleAccordion} = props
 
    const [isAllVerb, setIsAllVerb] = useState(true)
+   const initializeVerb = useRef(false)
+   const verbRef = useRef(null)
+   const verbPanelRef = useRef(null)
 
    const isFirstRender = useRef(true)
    const verbSelection = useRef(['amar (-AR)', 'beber (-ER)', 'decidir (-IR)', 'vir', 'dizer', 'ler', 'dar', 'estar', 'fazer', 'ir', 'ouvir', 'poder', 'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'pôr'])
 
    useEffect(() => {
-      if (isAllVerb && !isFirstRender.current) {
+      if (isAllVerb && initializeVerb.current) {
          let divArr = document.getElementsByClassName('verb-checkbox')
          for (let div of divArr) {
             div.checked = false
@@ -19,7 +22,10 @@ const SelectVerb = (props) => {
    }, [isAllVerb])
 
    const onFirstRender = () => {
-      isFirstRender.current = false
+      if (!initializeVerb.current) {
+         verbRef.current.addEventListener('click', () => toggleAccordion(verbRef.current, verbPanelRef.current))
+         initializeVerb.current = true
+      }
    }
    
     const handleCheckbox = (e) => {
@@ -42,19 +48,23 @@ const SelectVerb = (props) => {
    }
 
    return (
-      <div id='selection'>
-         <h3>Select Verbs to Practice</h3>
-         <div className='selection-options'>
-            <div className='selection-input' id='input-all'>
-               <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
-               <label htmlFor='verb0'> All</label>
-            </div>
-            {verbSelection.current.map((tense,i) => (
-               <div key={`checkbox${i}`}>
-                  <input className='auto-checkbox, verb-checkbox' type='checkbox' id={`verb-${i + 1}`} value={tense} onChange={handleCheckbox} />
-                  <label htmlFor={`verb-${i + 1}`}> {tense}</label>
+      <div id='selection' className='single-selection'>
+         <div ref={verbRef} className='select-accordion'>
+            <h3>Select Verbs to Practice</h3>
+         </div>
+         <div ref={verbPanelRef} className='selection-options closed'>
+            <div className='options-box'>
+               <div className='selection-input' id='input-all'>
+                  <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
+                  <label className='select-label' htmlFor='verb0'> All</label>
                </div>
-            ))}
+               {verbSelection.current.map((tense,i) => (
+                  <div key={`checkbox${i}`}>
+                     <input className='auto-checkbox, verb-checkbox' type='checkbox' id={`verb${i + 1}`} value={tense} onChange={handleCheckbox} />
+                     <label className='select-label' htmlFor={`verb${i + 1}`}> {tense}</label>
+                  </div>
+               ))}
+            </div>
          </div>
       </div>
    )

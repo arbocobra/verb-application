@@ -34,12 +34,9 @@ const TestContainer = (props) => {
 
    const loadData = () => {      
       selectFilteredData(tenseFilter, verbFilter)
-      .then(data => {
-         console.log(data)
-         setTestQuestions(data)
-      })
+      .then(data => setTestQuestions(data) )
    }
-
+ 
    useEffect(() => {
       if (testQuestions.length > 0 && !initializeRandomize.current) {
          initializeRandomize.current = true
@@ -90,7 +87,7 @@ const TestContainer = (props) => {
 
    if (testActive && initializeRandomize.current) {
       return (
-      <div id='question-container' className='question-box'>
+      <div id='test-container'>
          <Question display={true} index={countIndex} verb={testQuestions[testIndexList[countIndex]]} handleResponse={handleResponse} />
          <Footer activeId={countIndex} testLength={testIndexList.length} completeTest={completeTest} /> 
       </div>

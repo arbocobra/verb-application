@@ -41,10 +41,12 @@ const Question = (props) => {
 
    if (display && verb) {
       return (
-         <div id='question-container' className='question-box'>
+         <div className='question-box'>
             <div className='question-container'>
                <div className='question-text'>
-                  {tense === 'imperative' ? `${conjugationE}!` : `${pronounE} ${conjugationE}`}
+                  <h3>
+                     {tense === 'imperative' ? `${conjugationE}!` : `${pronounE} ${conjugationE}`}
+                  </h3>
                </div>
                <Answer index={index} verb={verb} handleSubmit={handleSubmit} responseIcon={responseIcon()} />
                <Response val={correct} correctResponse={fullP} />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Selection from './Selection';
 import TestContainer from './TestContainer';
+import Header from './Header';
 
 const Verbs = () => {
 
@@ -17,10 +18,11 @@ const Verbs = () => {
       setTenseFilter(['all'])
       setVerbFilter(['all'])
       setDisplayActive(false)
-   }
+   } 
 
    return (
       <div id='verbs'>
+         <Header />
          { displayActive ? <TestContainer resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
       </div>
    )

@@ -10,6 +10,7 @@ const Results = (props) => {
 
    const handleReset = () => resetTest()
 
+   const answeredCount = results.correct.length + results.incorrect.length
    const correctCount = results.correct.length
    const incorrectCount = results.incorrect.length
    const incorrectAnswers = results.incorrect
@@ -19,7 +20,7 @@ const Results = (props) => {
          <div className='results-container'>
             <div className='results score'>
                <p>Test Score</p>
-               <p>Questions Answered: {totalQuestions}</p>
+               <p>Questions Answered: {`${answeredCount}/${totalQuestions}`}</p>
                <p>Correct: {correctCount}</p>
                <p>Incorrect: {incorrectCount}</p>
 

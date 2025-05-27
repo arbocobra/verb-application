@@ -27,13 +27,19 @@ const Selection = (props) => {
       setSubmit(true)
    }
 
+   const toggleAccordion = (accordion, panel) => {
+      accordion.classList.toggle('active')
+      if (accordion.classList.contains('active')) panel.classList.remove('closed')
+      else panel.classList.add('closed')
+   }
+
    return (
       <div className='selection-container'>
          <div className='selection-box'>
-            <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} />
-            <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} />
+            <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} toggleAccordion={toggleAccordion} />
+            <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} toggleAccordion={toggleAccordion} />
          </div>
-         <div ref={selectButtonRef} className='button md'>Begin Test</div>
+         <div ref={selectButtonRef} className='button start'>Begin Test</div>
       </div>
    )
 }
