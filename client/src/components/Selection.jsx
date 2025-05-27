@@ -20,12 +20,12 @@ const Selection = (props) => {
    }
 
    return (
-      <div className='selection-container'>
-         <div className='selection-box'>
+      <div>
+         <div>
             <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} toggleAccordion={toggleAccordion} />
             <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} toggleAccordion={toggleAccordion} />
          </div>
-         <div onClick={submitSelection} className='button start'>Begin Test</div>
+         <div onClick={submitSelection}>Begin Test</div>
       </div>
    )
 }

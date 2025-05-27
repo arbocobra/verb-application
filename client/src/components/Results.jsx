@@ -7,24 +7,24 @@ const Results = (props) => {
    const incorrectAnswers = results.incorrect
 
    return (
-      <div id='results-box'>
-         <div className='results-container'>
-            <div className='results score'>
+      <div>
+         <div>
+            <div>
                <p>Test Score</p>
                <p>Questions Answered: {`${answeredCount}/${totalQuestions}`}</p>
                <p>Correct: {correctCount}</p>
                <p>Incorrect: {incorrectCount}</p>
             </div>
-            <div className='results errors'>
-               Incorrect Conjugations
+            <div>
+               Incorrect Conjugations:
                <ul>
                   {incorrectAnswers.map((verb, i) => (<li key={i}>{verb}</li>))}
                </ul>
             </div>
          </div>
-         <div id='footer' className='footer-container'>
-            <div className='end-game'>
-               <div id='button3' className='button' onClick={resetTest}>Restart</div>
+         <div>
+            <div>
+               <div onClick={resetTest}>Restart</div>
             </div>
          </div>
       </div>

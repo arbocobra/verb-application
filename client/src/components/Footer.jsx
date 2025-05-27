@@ -1,18 +1,13 @@
-import { useEffect, useRef } from 'react';
-
 const Footer = (props) => {
    const { activeId, testLength, completeTest } = props
-   const endTestRef = useRef(null)
-
-   useEffect(() => endTestRef.current.addEventListener('click', completeTest),[])
 
    return (
-      <div id='footer' className='footer-container'>
-         <div className='count-box'>
+      <div id='footer'>
+         <div>
             <p>{`${activeId + 1} / ${testLength}`}</p>
          </div>
-         <div className='end-game'>
-            <div ref={endTestRef} className='button sm'>End Game</div>
+         <div>
+            <div onClick={completeTest}>End Game</div>
          </div>
       </div>
    )

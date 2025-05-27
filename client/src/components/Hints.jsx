@@ -27,16 +27,16 @@ const Hints = (props) => {
    }, [tense, infinitiveP, innerId])
    
    return (
-      <div className='hint-container'>
-         <div className='hint'>
-            <div className='hint-title' onClick={toggleHint}>Hint 1</div>
-            <div className='hint-contents hidden'>
+      <div>
+         <div>
+            <div onClick={toggleHint}>Hint 1</div>
+            <div className='hidden'>
                <p>{`${tense} // ${infinitiveP}`}</p>
             </div>    
          </div>
-         <div className='hint'>
-            <div className='hint-title' onClick={toggleHint}>Hint 2</div>
-            <div className='hint-contents hidden'>
+         <div>
+            <div onClick={toggleHint}>Hint 2</div>
+            <div className='hidden'>
                {hintA ? <p>{hintA}</p> : <p>No extra hint</p>}
             </div>    
          </div>

@@ -30,19 +30,19 @@ const Answer = (props) => {
 
    if (verb.tense === 'imperative') {
       return (
-         <div className='answer-container'>
-            <input ref={inputRef} onKeyUp={pressEnter} className='answer-input' maxLength='19' type='text' />
-            <div className='pronoun imperative'>{`-${verb.pronounP}`}</div>
-            <div className='icon'>{icon}</div>
+         <div>
+            <input ref={inputRef} onKeyUp={pressEnter} maxLength='19' type='text' />
+            <div>{`-${verb.pronounP}`}</div>
+            <div>{icon}</div>
             <AccentKeyboard typeAccent={typeAccent} />
          </div>
       )
    } else {
       return (
-         <div className='answer-container'>
-            <div className='pronoun'>{verb.pronounP}</div>
-            <input ref={inputRef} onKeyUp={pressEnter} className='answer-input' maxLength='19' type='text' />
-            <div className='icon'>{icon}</div>
+         <div>
+            <div>{verb.pronounP}</div>
+            <input ref={inputRef} onKeyUp={pressEnter} maxLength='20' type='text' />
+            <div>{icon}</div>
             <AccentKeyboard typeAccent={typeAccent} />
          </div>
       )

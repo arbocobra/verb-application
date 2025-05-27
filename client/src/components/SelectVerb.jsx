@@ -10,12 +10,11 @@ const SelectVerb = (props) => {
    const handleCheckbox = (e) => {
       let val = e.target.value
       let isSelected = e.target.checked
-      let checkBoxCollection = verbCheckboxRef.current.children
       
       if (val === 'all') {
-         selectAll(isSelected, checkBoxCollection)       
+         selectAll(isSelected, verbCheckboxRef.current.children)       
       } else {
-         selectOne(val, isSelected, checkBoxCollection)
+         selectOne(val, isSelected)
       }
    }
 
@@ -33,10 +32,9 @@ const SelectVerb = (props) => {
       }
    }
 
-   const selectOne = (val, isSelected, collection) => {
+   const selectOne = (val, isSelected) => {
       if (isSelected) {
          let arr = [...verbFilter].filter(el => el !== 'all')
-         collection[0].firstChild.checked = false
          arr.push(val)
          setIsAllVerb(false)
          setVerbFilter(arr)
@@ -47,20 +45,20 @@ const SelectVerb = (props) => {
    }
 
    return (
-      <div id='selection' className='single-selection'>
-         <div className='select-accordion' onClick={toggleAccordion}>
+      <div>
+         <div onClick={toggleAccordion}>
             <h3>Select Verbs to Practice</h3>
          </div>
-         <div className='selection-options closed'>
-            <div ref={verbCheckboxRef} className='options-box'>
-               <div className='selection-input' id='input-all'>
+         <div className='closed'>
+            <div ref={verbCheckboxRef}>
+               <div>
                   <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
-                  <label className='select-label' htmlFor='verb0'> All</label>
+                  <label htmlFor='verb0'> All</label>
                </div>
                {verbSelection.current.map((tense,i) => (
                   <div key={`checkbox${i}`}>
-                     <input className='auto-checkbox, verb-checkbox' type='checkbox' id={`verb${i + 1}`} value={tense} onChange={handleCheckbox} />
-                     <label className='select-label' htmlFor={`verb${i + 1}`}> {tense}</label>
+                     <input type='checkbox' id={`verb${i + 1}`} value={tense} onChange={handleCheckbox} />
+                     <label htmlFor={`verb${i + 1}`}>{tense}</label>
                   </div>
                ))}
             </div>

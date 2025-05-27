@@ -10,12 +10,11 @@ const SelectTense = (props) => {
    const handleCheckbox = (e) => {
       let val = e.target.value
       let isSelected = e.target.checked
-      let checkBoxCollection = tenseCheckboxRef.current.children
       
       if (val === 'all') {
-         selectAll(isSelected, checkBoxCollection)       
+         selectAll(isSelected, tenseCheckboxRef.current.children)       
       } else {
-         selectOne(val, isSelected, checkBoxCollection)
+         selectOne(val, isSelected)
       }
    }
 
@@ -33,10 +32,9 @@ const SelectTense = (props) => {
       }
    }
 
-   const selectOne = (val, isSelected, collection) => {
+   const selectOne = (val, isSelected) => {
       if (isSelected) {
          let arr = [...tenseFilter].filter(el => el !== 'all')
-         collection[0].firstChild.checked = false
          arr.push(val)
          setIsAllTense(false)
          setTenseFilter(arr)
@@ -47,20 +45,20 @@ const SelectTense = (props) => {
    }
 
    return (
-      <div id='selection' className='single-selection'>
-         <div className='select-accordion' onClick={toggleAccordion}>
+      <div>
+         <div onClick={toggleAccordion}>
             <h3>Select Tense to Practice</h3>
          </div>
-         <div className='selection-options closed'>
-            <div ref={tenseCheckboxRef} className='options-box'>
-               <div className='selection-input' id='input-all'>
+         <div className='closed'>
+            <div ref={tenseCheckboxRef}>
+               <div>
                   <input type='checkbox' id='tense0' value='all' onChange={handleCheckbox} checked={isAllTense} />
-                  <label className='select-label' htmlFor='tense0'> All</label>
+                  <label htmlFor='tense0'>All</label>
                </div>
                {tenseSelection.current.map((tense,i) => (
                   <div key={`checkbox${i}`}>
-                     <input className='auto-checkbox tense-checkbox' type='checkbox' id={`tense${i + 1}`} value={tense} onChange={handleCheckbox} />
-                     <label className='select-label' htmlFor={`tense${i + 1}`}> {tense}</label>
+                     <input type='checkbox' id={`tense${i + 1}`} value={tense} onChange={handleCheckbox} />
+                     <label htmlFor={`tense${i + 1}`}>{tense}</label>
                   </div>
                ))}
             </div>

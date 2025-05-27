@@ -16,22 +16,22 @@ const AccentKeyboard = (props) => {
    },[])
    
    return (
-      <div className='keyboard-container'>
-         <div className='keyboard-box'>
-            <div ref={keyboardRef} className='keyboard-title'>Use Accent Keyboard</div>
-            <div className='keyboard-contents hidden'>
-               <button className='key' type='button' onClick={()=> typeAccent('á')}>á</button>
-               <button className='key' type='button' onClick={()=> typeAccent('â')}>â</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ã')}>ã</button>
-               <button className='key' type='button' onClick={()=> typeAccent('à')}>à</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ç')}>ç</button>
-               <button className='key' type='button' onClick={()=> typeAccent('é')}>é</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ê')}>ê</button>
-               <button className='key' type='button' onClick={()=> typeAccent('í')}>í</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ó')}>ó</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ô')}>ô</button>
-               <button className='key' type='button' onClick={()=> typeAccent('õ')}>õ</button>
-               <button className='key' type='button' onClick={()=> typeAccent('ú')}>ú</button>
+      <div>
+         <div>
+            <div ref={keyboardRef}>Use Accent Keyboard</div>
+            <div className='hidden'>
+               <button type='button' onClick={()=> typeAccent('á')}>á</button>
+               <button type='button' onClick={()=> typeAccent('â')}>â</button>
+               <button type='button' onClick={()=> typeAccent('ã')}>ã</button>
+               <button type='button' onClick={()=> typeAccent('à')}>à</button>
+               <button type='button' onClick={()=> typeAccent('ç')}>ç</button>
+               <button type='button' onClick={()=> typeAccent('é')}>é</button>
+               <button type='button' onClick={()=> typeAccent('ê')}>ê</button>
+               <button type='button' onClick={()=> typeAccent('í')}>í</button>
+               <button type='button' onClick={()=> typeAccent('ó')}>ó</button>
+               <button type='button' onClick={()=> typeAccent('ô')}>ô</button>
+               <button type='button' onClick={()=> typeAccent('õ')}>õ</button>
+               <button type='button' onClick={()=> typeAccent('ú')}>ú</button>
             </div>    
          </div>
       </div>

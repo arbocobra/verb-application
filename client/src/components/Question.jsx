@@ -11,7 +11,7 @@ import exclamationMark from './../assets/exclamation.svg'
 const Question = (props) => {
    const {display, index, verb, handleResponse} = props
 
-   const { conjugationE, conjugationP, infinitiveE, infinitiveP, innerId, pronounE, pronounP, tense } = verb
+   const { conjugationE, conjugationP, infinitiveP, innerId, pronounE, pronounP, tense } = verb
    const fullP = `${pronounP} ${conjugationP}`
 
    const [correct, setCorrect] = useState(null) 
@@ -41,9 +41,9 @@ const Question = (props) => {
 
    if (display && verb) {
       return (
-         <div className='question-box'>
-            <div className='question-container'>
-               <div className='question-text'>
+         <div>
+            <div>
+               <div>
                   <h3>
                      {tense === 'imperative' ? `${conjugationE}!` : `${pronounE} ${conjugationE}`}
                   </h3>
