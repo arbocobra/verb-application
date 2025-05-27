@@ -2,14 +2,9 @@ import { useEffect, useRef } from 'react';
 import AccentKeyboard from './AccentKeyboard';
 
 const Answer = (props) => {
-   const { index, verb, handleSubmit, responseIcon } = props
+   const { verb, handleSubmit, responseIcon } = props
 
    const inputRef = useRef(null);
-
-   // useEffect(() => {
-   //    inputRef.current.addEventListener('keyup', pressEnter)
-   //    inputRef.current.focus()
-   // }, [index])
 
    useEffect(() => {
       inputRef.current.focus()
@@ -21,7 +16,6 @@ const Answer = (props) => {
          const clearCaps = e.target.value.toLowerCase()
          handleSubmit(clearCaps)
          clearText(e.target)
-         // inputRef.current.removeEventListener('keyup', pressEnter)
        }
    }
 

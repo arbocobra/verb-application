@@ -14,16 +14,8 @@ const getFilteredVerbs = async(req, res) => {
    try {
       const { tense, infinitiveP } = req.query;
       let query = {}
-
-      if (tense !== undefined) {
-         const tenseArray = tense.split(',').map(decodeURIComponent);
-         query.tense = { $in: tenseArray }   
-      }
-      
-      if (infinitiveP !== undefined) {
-         const infinitiveArray = infinitiveP.split(',').map(decodeURIComponent);
-         query.infinitiveP = { $in: infinitiveArray }
-      }
+      if (tense !== undefined) query.tense = { $in: tense }
+      if (infinitiveP !== undefined) query.infinitiveP = { $in: infinitiveP }
 
       const data = await Verb.find(query)
       res.status(200).json(data)

@@ -51,7 +51,7 @@ const Question = (props) => {
                <Answer index={index} verb={verb} handleSubmit={handleSubmit} responseIcon={responseIcon()} />
                <Response val={correct} correctResponse={fullP} />
             </div>
-            <Hints index={index} innerId={innerId} infinitiveP={infinitiveP} tense={tense} />
+            <Hints innerId={innerId} infinitiveP={infinitiveP} tense={tense} />
          </div>
       )
    } else return null

@@ -4,7 +4,7 @@ const Header = () => {
       <div id='header'>
          <div className='header-container'>
             <div className='header-icon'>
-               <img src={IconFlag}/>
+               <img height='100' width='100' src={IconFlag}/>
             </div>
             <div className='header-title'>
                <h1>Portuguese Verb Translation Flashcards</h1>

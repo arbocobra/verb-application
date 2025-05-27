@@ -1,42 +1,41 @@
-import { useState, useEffect, useRef } from 'react';
-import { selectHints } from '../functions/loadingFunctions'
+import { useState, useEffect } from 'react';
+import { fetchHints } from '../functions/loadingFunctions'
+
 
 const Hints = (props) => {
-   const { index, innerId, infinitiveP, tense } = props
+   const { innerId, infinitiveP, tense } = props
 
    const [hintA, setHintA] = useState()
-   const initializeData = useRef(false)
+
+   const toggleHint = (e) => {
+      e.preventDefault();
+      const contentDiv = e.target.nextElementSibling
+      contentDiv.classList.toggle('hidden')
+   }
 
    useEffect(() => {
-      if (!initializeData.current){
-         const divArr = document.getElementsByClassName('hint-title')
-         for (let div of divArr) {
-            let divContents = div.nextElementSibling
-            div.addEventListener('click', () => divContents.classList.toggle('hidden'))
-         }
-      initializeData.current = true
-      }
-   },[])
-
-   useEffect(() => {
+      let ignore = false
       if (innerId < 12 || innerId > 23) {
          if (!infinitiveP.includes('(')) {
-            selectHints(tense, infinitiveP)
-            .then(data => setHintA(data))
+            fetchHints(tense)
+            .then(data => {
+               if (!ignore) setHintA(data[infinitiveP])
+            })
          }
       }
-   }, [index])
+      return () => ignore = true
+   }, [tense, infinitiveP, innerId])
    
    return (
       <div className='hint-container'>
          <div className='hint'>
-            <div className='hint-title'>Hint 1</div>
+            <div className='hint-title' onClick={toggleHint}>Hint 1</div>
             <div className='hint-contents hidden'>
                <p>{`${tense} // ${infinitiveP}`}</p>
             </div>    
          </div>
          <div className='hint'>
-            <div className='hint-title'>Hint 2</div>
+            <div className='hint-title' onClick={toggleHint}>Hint 2</div>
             <div className='hint-contents hidden'>
                {hintA ? <p>{hintA}</p> : <p>No extra hint</p>}
             </div>    

@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
 import { useState, useEffect, useRef } from 'react';
 import { PropagateLoader } from 'react-spinners';
-import { selectFilteredData, randomizeQuestionIndex } from './../functions/loadingFunctions';
-import.meta.env.VITE_API_URL;
+import { randomizeQuestionIndex, fetchFilteredData } from './../functions/loadingFunctions';
 
 import Question from './Question';
 import Results from './Results';
@@ -17,47 +15,32 @@ const TestContainer = (props) => {
    const [testActive, setTestActive] = useState(true)
    const [testQuestions, setTestQuestions] = useState([])
    const [results, setResults] = useState({ correct: [], incorrect: [] })
-   
-   const initializeData = useRef(false)
+
+   const finalQuestion = useRef(false)
    const initializeRandomize = useRef(false)
    const resultsRef = useRef(null)
    const countRef = useRef(0)
    
-   const finalQuestion = useRef(false)
-
    useEffect(() => {
-      if (!initializeData.current) {
-         initializeData.current = true
-         loadData()
-      }
-   }, [])
-
-   const loadData = () => {      
-      selectFilteredData(tenseFilter, verbFilter)
-      .then(data => setTestQuestions(data) )
-   }
+      let ignore = false
+      fetchFilteredData(tenseFilter, verbFilter)
+      .then(data => {
+         if (!ignore) setTestQuestions(data)
+      })
+      return () => ignore = true
+   }, [tenseFilter, verbFilter])
  
    useEffect(() => {
       if (testQuestions.length > 0 && !initializeRandomize.current) {
          initializeRandomize.current = true
-         randomizeIndex()
+         const idArray = randomizeQuestionIndex(testQuestions)
+         setTestIndexList(idArray)
       }
    }, [testQuestions])
-
-   const randomizeIndex = () => {
-      const idArray = randomizeQuestionIndex(testQuestions)
-      setTestIndexList(idArray)
-   }
-
-   useEffect(() => { resultsRef.current = { ...results} }, [results])
-
-   useEffect(() => { countRef.current = countIndex }, [countIndex])
-
-   useEffect(() => {
-      if (testIndexList.length > 0 && countIndex == testIndexList.length - 1) {
-         finalQuestion.current = true
-      } 
-   }, [countIndex])
+   
+   resultsRef.current = { ...results}
+   countRef.current = countIndex
+   if (testIndexList.length > 0 && countIndex == testIndexList.length - 1) finalQuestion.current = true
 
    const handleResponse = (bool, correctValue) => {
       if (bool) {

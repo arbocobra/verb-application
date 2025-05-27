@@ -1,9 +1,16 @@
+.hidden {
+	display: none;
+}
+.closed {
+  max-height: 0px !important;
+  overflow: hidden;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem 0;
 }
-#verbs {
+/* #verbs {
   display: grid;
   grid-template-columns: 40px auto 40px;
   grid-template-rows: fit-content(150px) 1fr;
@@ -36,7 +43,6 @@ h3 {
 }
 .closed {
   max-height: 0px !important;
-  
 }
 .selection-options {
   transition: max-height 0.5s ease-out;
@@ -78,11 +84,11 @@ input[type="checkbox"]{
   border: 3px #333 solid;
   background-color: #333;
   color: #fff;
-}
+} */
 
 /* TEST */
 
-#test-container {
+/* #test-container {
   grid-column-start: 2;
   grid-row-start: 2;
   width: 100%;
@@ -145,10 +151,11 @@ input[type="checkbox"]{
   display: flex;
   flex: 1 0 200px;
   flex-flow: column;
-}
+} */
+
 /* Header */
 
-#header {
+/* #header {
   grid-column-start: 2;
   grid-row-start: 1;
   width: 100%;
@@ -185,11 +192,11 @@ h1 {
   margin: 0;
   font-size: 36px;
   line-height: 40px;
-}
+} */
 
 /* Mobile */
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
   h1 {
     font-size: 30px;
   }
@@ -202,7 +209,9 @@ h1 {
   }
 
 
-}
+} */
+
+/* OLD */
 
 /* 
 #root {

@@ -1,43 +1,27 @@
 /* eslint-disable no-undef */
 import.meta.env.VITE_API_URL;
+import axios from 'axios';
 
-export const selectHints = async (tense, verb) => {
-   try {
-      let tenseParam = encodeURIComponent(tense)
-      const response = await fetch(`${process.env.VITE_API_URL}/api/hints/${tenseParam}`, {
-         method: 'GET',
-         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-         }
-      })
-      if (!response.ok) throw new Error(`HTTP error - Status: ${response.status}`);
-      const data = await response.json();
-      return data[0].values[verb]
-   } catch (error) {
-      console.error('Fetch Hint Error.', error)
-   }
+export const fetchHints = (tense) => {
+   return axios.get(`${process.env.VITE_API_URL}/api/hints/${tense}`)
+   .then(response => response.data[0].values)
 }
 
-export const selectFilteredData = async (tense, infinitives) => {
-   const queryParams = new URLSearchParams();
-
-   if (tense[0] !== 'all') queryParams.append('tense', tense)
-   if (infinitives[0] !== 'all') queryParams.append('infinitiveP', infinitives)
-   
-   try {
-      const response = await fetch(`${process.env.VITE_API_URL}/api/verbs/filter?${queryParams.toString()}`, {
-         method: 'GET',
-         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-         }
+export const fetchFilteredData = (tense, infinitiveP) => {
+   if (tense[0] === 'all' && infinitiveP[0] === 'all') {
+      return axios.get(`${process.env.VITE_API_URL}/api/verbs`)
+      .then(response => response.data)
+   } else {
+      let paramQuery = {}
+      if (tense[0] !== 'all') paramQuery.tense = tense
+      if (infinitiveP[0] !== 'all') paramQuery.infinitiveP = infinitiveP
+      const axiosInstance = axios.create({
+      paramsSerializer: {indexes: null}
       })
-      if (!response.ok) throw new Error(`HTTP error - Status: ${response.status}`);
-      const data = await response.json();
-      return data
-   } catch (error) {
-      console.error('Fetch Error.', error)
+      return axiosInstance.get(`${process.env.VITE_API_URL}/api/verbs/filter`, {
+         params: paramQuery
+      })
+      .then(response => response.data)
    }
 }
 

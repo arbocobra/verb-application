@@ -1,14 +1,5 @@
-import { useEffect, useRef } from 'react';
-
 const Results = (props) => {
    const { totalQuestions, resetTest, results } = props
-   const resultsButtonRef = useRef(null)
-
-   useEffect(() => {
-      resultsButtonRef.current.addEventListener('click', handleReset)
-   }, [])
-
-   const handleReset = () => resetTest()
 
    const answeredCount = results.correct.length + results.incorrect.length
    const correctCount = results.correct.length
@@ -23,7 +14,6 @@ const Results = (props) => {
                <p>Questions Answered: {`${answeredCount}/${totalQuestions}`}</p>
                <p>Correct: {correctCount}</p>
                <p>Incorrect: {incorrectCount}</p>
-
             </div>
             <div className='results errors'>
                Incorrect Conjugations
@@ -34,7 +24,7 @@ const Results = (props) => {
          </div>
          <div id='footer' className='footer-container'>
             <div className='end-game'>
-               <div ref={resultsButtonRef} id='button3' className='button'>Restart</div>
+               <div id='button3' className='button' onClick={resetTest}>Restart</div>
             </div>
          </div>
       </div>
