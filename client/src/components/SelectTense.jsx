@@ -1,60 +1,58 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 const SelectTense = (props) => {
    const {tenseFilter, setTenseFilter, toggleAccordion} = props
 
    const [isAllTense, setIsAllTense] = useState(true)
-   const initializeTense = useRef(false)
-   const tenseRef = useRef(null)
-   const tensePanelRef = useRef(null)
-
+   const tenseCheckboxRef = useRef(null)
    const tenseSelection = useRef(['present', 'past', 'present continuous', 'past continuous', 'present perfect', 'past perfect', 'future perfect', 'imperfect', 'imperative'])
 
-   useEffect(() => {
-      if (isAllTense && initializeTense.current) {
-         let divArr = document.getElementsByClassName('tense-checkbox')
-         if (divArr) {
-            for (let div of divArr) {
-               div.checked = false
-            }
-         }
-      }
-      onFirstRender()
-   }, [isAllTense])
-
-   const onFirstRender = () => {
-      if (!initializeTense.current) {
-         tenseRef.current.addEventListener('click', () => toggleAccordion(tenseRef.current, tensePanelRef.current))
-         initializeTense.current = true
+   const handleCheckbox = (e) => {
+      let val = e.target.value
+      let isSelected = e.target.checked
+      let checkBoxCollection = tenseCheckboxRef.current.children
+      
+      if (val === 'all') {
+         selectAll(isSelected, checkBoxCollection)       
+      } else {
+         selectOne(val, isSelected, checkBoxCollection)
       }
    }
 
-    const handleCheckbox = (e) => {
-      let val = e.target.value
-      let isSelected = e.target.checked
-      let arr = [...tenseFilter]
-
-      if (val === 'all') {
-         setIsAllTense(current => !current)
-         if (isSelected) setTenseFilter(['all'])
-         else arr = [...arr].filter(el => el !== 'all')         
+   const selectAll = (isSelected, collection) => {
+      if (isSelected) {
+         setIsAllTense(true)
+         setTenseFilter(['all'])
+         for (let i = 1; i < collection.length; i++) {
+            collection[i].firstChild.checked = false
+         }
       } else {
-         if (isSelected) {
-            arr = [...arr].filter(el => el !== 'all')
-            arr.push(val)
-            setIsAllTense(false)
-         } else arr = [...arr].filter(el => el !== val)
+         setIsAllTense(false)
+         let updateFilter = [...tenseFilter].filter(el => el !== 'all')
+         setTenseFilter(updateFilter)
+      }
+   }
+
+   const selectOne = (val, isSelected, collection) => {
+      if (isSelected) {
+         let arr = [...tenseFilter].filter(el => el !== 'all')
+         collection[0].firstChild.checked = false
+         arr.push(val)
+         setIsAllTense(false)
+         setTenseFilter(arr)
+      } else {
+         let arr = [...tenseFilter].filter(el => el !== val)
          setTenseFilter(arr)
       }
    }
 
    return (
       <div id='selection' className='single-selection'>
-         <div ref={tenseRef} className='select-accordion'>
+         <div className='select-accordion' onClick={toggleAccordion}>
             <h3>Select Tense to Practice</h3>
          </div>
-         <div ref={tensePanelRef} className='selection-options closed'>
-            <div className='options-box'>
+         <div className='selection-options closed'>
+            <div ref={tenseCheckboxRef} className='options-box'>
                <div className='selection-input' id='input-all'>
                   <input type='checkbox' id='tense0' value='all' onChange={handleCheckbox} checked={isAllTense} />
                   <label className='select-label' htmlFor='tense0'> All</label>

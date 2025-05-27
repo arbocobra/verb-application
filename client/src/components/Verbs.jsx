@@ -10,7 +10,6 @@ const Verbs = () => {
    const [verbFilter, setVerbFilter] = useState(['all']) 
 
    const updatePage = () => {
-      document.getElementById('selection').classList.add('hidden')
       setDisplayActive(true)
    }
 

@@ -1,59 +1,58 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const SelectVerb = (props) => {
    const {verbFilter, setVerbFilter, toggleAccordion} = props
 
    const [isAllVerb, setIsAllVerb] = useState(true)
-   const initializeVerb = useRef(false)
-   const verbRef = useRef(null)
-   const verbPanelRef = useRef(null)
-
-   const isFirstRender = useRef(true)
+   const verbCheckboxRef = useRef(null)
    const verbSelection = useRef(['amar (-AR)', 'beber (-ER)', 'decidir (-IR)', 'vir', 'dizer', 'ler', 'dar', 'estar', 'fazer', 'ir', 'ouvir', 'poder', 'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'pôr'])
 
-   useEffect(() => {
-      if (isAllVerb && initializeVerb.current) {
-         let divArr = document.getElementsByClassName('verb-checkbox')
-         for (let div of divArr) {
-            div.checked = false
-         }
-      }
-      onFirstRender()
-   }, [isAllVerb])
-
-   const onFirstRender = () => {
-      if (!initializeVerb.current) {
-         verbRef.current.addEventListener('click', () => toggleAccordion(verbRef.current, verbPanelRef.current))
-         initializeVerb.current = true
-      }
-   }
-   
-    const handleCheckbox = (e) => {
+   const handleCheckbox = (e) => {
       let val = e.target.value
       let isSelected = e.target.checked
-      let arr = [...verbFilter]
-
+      let checkBoxCollection = verbCheckboxRef.current.children
+      
       if (val === 'all') {
-         setIsAllVerb(current => !current)
-         if (isSelected) setVerbFilter(['all'])
-         else arr = [...arr].filter(el => el !== 'all')         
+         selectAll(isSelected, checkBoxCollection)       
       } else {
-         if (isSelected) {
-            arr = [...arr].filter(el => el !== 'all')
-            arr.push(val)
-            setIsAllVerb(false)
-         } else arr = [...arr].filter(el => el !== val)
+         selectOne(val, isSelected, checkBoxCollection)
+      }
+   }
+
+   const selectAll = (isSelected, collection) => {
+      if (isSelected) {
+         setIsAllVerb(true)
+         setVerbFilter(['all'])
+         for (let i = 1; i < collection.length; i++) {
+            collection[i].firstChild.checked = false
+         }
+      } else {
+         setIsAllVerb(false)
+         let updateFilter = [...verbFilter].filter(el => el !== 'all')
+         setVerbFilter(updateFilter)
+      }
+   }
+
+   const selectOne = (val, isSelected, collection) => {
+      if (isSelected) {
+         let arr = [...verbFilter].filter(el => el !== 'all')
+         collection[0].firstChild.checked = false
+         arr.push(val)
+         setIsAllVerb(false)
+         setVerbFilter(arr)
+      } else {
+         let arr = [...verbFilter].filter(el => el !== val)
          setVerbFilter(arr)
       }
    }
 
    return (
       <div id='selection' className='single-selection'>
-         <div ref={verbRef} className='select-accordion'>
+         <div className='select-accordion' onClick={toggleAccordion}>
             <h3>Select Verbs to Practice</h3>
          </div>
-         <div ref={verbPanelRef} className='selection-options closed'>
-            <div className='options-box'>
+         <div className='selection-options closed'>
+            <div ref={verbCheckboxRef} className='options-box'>
                <div className='selection-input' id='input-all'>
                   <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
                   <label className='select-label' htmlFor='verb0'> All</label>
