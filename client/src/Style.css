@@ -1,0 +1,78 @@
+.hidden {
+	display: none;
+}
+.closed {
+  max-height: 0px !important;
+  overflow: hidden;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-column.left {
+  align-items: flex-start;
+}
+.flex-column.centre {
+  align-items: center;
+}
+.flex-row.left {
+  justify-content: flex-start;
+}
+.flex-row.centre {
+  justify-content: center;
+}
+.flex-column.middle {
+  justify-content: center;
+}
+.flex-row.middle {
+  align-items: center;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.nowrap {
+  flex-wrap: nowrap;
+}
+.bottom-40 {
+  margin-bottom: 40px;
+}
+.w-100 {
+  width: 100%;
+}
+.g-20 {
+  gap: 20px;
+}
+.g-10 {
+  gap: 10px;
+}
+.p-10 {
+  padding: 10px;
+}
+.p-010 {
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+.button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.button.simple {
+  border: 1px solid #213547;
+}
+.button.accordion {
+  background-color: #ebebeb;
+  padding: 15px;
+}
+.h-30 {
+  height: 30px;
+}
+.h-20 {
+  height: 20px;
+}
+.italic {
+   font-style: italic;
+}

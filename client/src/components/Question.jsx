@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Answer from './Answer';
-import Hints from './Hints';
 import Response from './Response';
+import Hints from './Hints';
+import Answer from './Answer';
 import { checkAnswer } from '../functions/responseFunctions';
 
 import checkMark from './../assets/check.svg'
@@ -41,15 +41,15 @@ const Question = (props) => {
 
    if (display && verb) {
       return (
-         <div>
-            <div>
+         <div id='Question' className='flex-row wrap g-20 middle bottom-40'>
+            <div className='question-wrap g-20 flex-column'>
                <div>
                   <h3>
                      {tense === 'imperative' ? `${conjugationE}!` : `${pronounE} ${conjugationE}`}
                   </h3>
                </div>
-               <Answer index={index} verb={verb} handleSubmit={handleSubmit} responseIcon={responseIcon()} />
-               <Response val={correct} correctResponse={fullP} />
+               <Response index={index} verb={verb} handleSubmit={handleSubmit} responseIcon={responseIcon()} />
+               <Answer val={correct} correctResponse={fullP} />
             </div>
             <Hints innerId={innerId} infinitiveP={infinitiveP} tense={tense} />
          </div>

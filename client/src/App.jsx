@@ -2,11 +2,12 @@
 import React from 'react';
 import Verbs from './components/Verbs';
 import './App.css'
+import './Style.css'
 
 const App = () => {
 
   return (
-    <div id='app'>
+    <div id='App'>
       <Verbs />
     </div>
   );

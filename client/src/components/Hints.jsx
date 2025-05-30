@@ -10,7 +10,7 @@ const Hints = (props) => {
    const toggleHint = (e) => {
       e.preventDefault();
       const contentDiv = e.target.nextElementSibling
-      contentDiv.classList.toggle('hidden')
+      contentDiv.classList.toggle('closed')
    }
 
    useEffect(() => {
@@ -27,16 +27,16 @@ const Hints = (props) => {
    }, [tense, infinitiveP, innerId])
    
    return (
-      <div>
-         <div>
-            <div onClick={toggleHint}>Hint 1</div>
-            <div className='hidden'>
+      <div id='hints' className='hint-wrap flex-column wrap g-10'>
+         <div className='button accordion hint'>
+            <div className='toggle-title' onClick={toggleHint}>Hint 1</div>
+            <div className='flex-column middle nowrap h-30 closed'>
                <p>{`${tense} // ${infinitiveP}`}</p>
             </div>    
          </div>
-         <div>
-            <div onClick={toggleHint}>Hint 2</div>
-            <div className='hidden'>
+         <div className='button accordion hint flex-column'>
+            <div className='toggle-title' onClick={toggleHint}>Hint 2</div>
+            <div className='closed flex-column middle nowrap h-30'>
                {hintA ? <p>{hintA}</p> : <p>No extra hint</p>}
             </div>    
          </div>

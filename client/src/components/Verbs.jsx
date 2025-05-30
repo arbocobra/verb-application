@@ -20,7 +20,7 @@ const Verbs = () => {
    } 
 
    return (
-      <div id='verbs'>
+      <div id='Verbs' className='flex-column nowrap'>
          <Header />
          { displayActive ? <TestContainer resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
       </div>

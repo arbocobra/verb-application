@@ -20,12 +20,14 @@ const Selection = (props) => {
    }
 
    return (
-      <div>
-         <div>
-            <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} toggleAccordion={toggleAccordion} />
-            <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} toggleAccordion={toggleAccordion} />
+      <div id='selection'>
+         <div className='flex-column nowrap left'>
+            <div className='flex-column nowrap w-100 g-20 bottom-40'>
+               <SelectTense tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} toggleAccordion={toggleAccordion} />
+               <SelectVerb verbFilter={verbFilter} setVerbFilter={setVerbFilter} toggleAccordion={toggleAccordion} />
+            </div>
+            <div className='button simple' onClick={submitSelection}>Begin Test</div>
          </div>
-         <div onClick={submitSelection}>Begin Test</div>
       </div>
    )
 }

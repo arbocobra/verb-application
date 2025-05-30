@@ -7,10 +7,10 @@ const Results = (props) => {
    const incorrectAnswers = results.incorrect
 
    return (
-      <div>
-         <div>
-            <div>
-               <p>Test Score</p>
+      <div id='Results'>
+         <div className='flex-column g-20 bottom-40'>
+            <div className='flex-column g-10'>
+               <h2 className='subheading'>Test Score</h2>
                <p>Questions Answered: {`${answeredCount}/${totalQuestions}`}</p>
                <p>Correct: {correctCount}</p>
                <p>Incorrect: {incorrectCount}</p>
@@ -23,8 +23,8 @@ const Results = (props) => {
             </div>
          </div>
          <div>
-            <div>
-               <div onClick={resetTest}>Restart</div>
+            <div className='flex-row'>
+               <div className='button simple' onClick={resetTest}>Restart</div>
             </div>
          </div>
       </div>
