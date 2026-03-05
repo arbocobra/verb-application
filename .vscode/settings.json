@@ -1,0 +1,19 @@
+{
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "files.exclude": {
+    "**/flutter/ephemeral": true,
+    "**/Flutter/ephemeral": true,
+    "**/.symlinks": true,
+    "**/.plugin_symlinks": true,
+    "client\\dist": true,
+    "client\\public": true,
+    "client\\package-lock.json": true,
+    "client\\node_modules": true,
+    "node_modules": true,
+    "package-lock.json": true,
+    ".vercel": true,
+    "client\\src\\OLD-App.css": true,
+    "client\\src\\Style.css": true
+  }
+}

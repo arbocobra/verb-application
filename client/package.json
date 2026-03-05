@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.1",
     "axios": "^1.9.0",
+    "clsx": "^2.1.1",
     "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
     "nodemon": "^3.1.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-spinners": "^0.17.0"
+    "react-spinners": "^0.17.0",
+    "tailwindcss": "^4.2.1",
+    "verbpracticeapp": "file:.."
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

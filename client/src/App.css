@@ -1,115 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import "tailwindcss";
 
-* {
-  font-family: "Open Sans", sans-serif;
-  box-sizing: border-box;
-  font-size: 24px;
-}
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem 0;
-  width: 100%;
-}
-h1, h2, h3, p, ul, li {
-  margin: 0;
-  padding: 0;
-}
-li {
-  margin-left: 20px;
-}
-.title {
-  font-size: 36px;
-  font-weight: 700;
-}
-.subheading {
-  font-size: 24px;
-  font-weight: 500;
-}
-h3 {
-  font-size: 20px;
-  text-transform: uppercase;
-}
-#App {
-  width: 100%;
-}
-#Verbs {
-  margin: 0 5%;
-}
-#Question {
-  min-height: 300px;
-}
-#Footer {
-  justify-content: space-between;
-}
-.selection-container {
-  max-height: 500px;
-  transition: max-height 0.5s;
-}
-.selection-container>div {
-  max-height: 500px;
-}
-.button.accent-key {
-  background-color: #f7f7f7;
-  border: 2px solid #d1d1d1;
-  border-radius: 5px;
-  height: 40px;
-  width: 40px;
-  padding: 0;
-}
-.accent-key:active {
-  background-color: #d1d1d1;
+@config '../tailwind.config.js';
+
+@theme {
+  --color-primary: #e20535;
+  --color-primaryLight: #e7375d;
+  --color-primaryExtraLight: #eb5f7d;
+  --color-primaryDark: #9e0325;
+  --color-secondary: #05e2b2;
+  --color-secondaryLight: #37e7c1;
+  --color-secondaryExtraLight: #5febcd;
+  --color-secondaryDark: #039e7c;
+  --color-tertiary: #ecc94b;
+  --color-tertiaryLight: #e7c137;
+  --color-tertiaryExtraLight: #ebcd5f;
+  --color-tertiaryDark: #e19a00;
 }
 
-.select-container {
-  border: 1px solid #213547;
-}
-.question-wrap {
-  flex: 3 1 400px;
-}
-.hint-wrap {
-  flex: 0 1 300px;
-}
-.toggle-title {
-  font-size: 20px;
-  font-weight: 600;
-}
-.icon {
-  aspect-ratio: 1;
-}
-.input-row > * {
-  font-size: 30px;
-  font-weight: 500;
-  color: #213547;
-  display: flex;
-}
-.input-row > input {
-  border: 0;
-  background: #ebebeb;
+#tense0:checked + label, 
+#tense1:checked + label, 
+#tense2:checked + label, 
+#tense3:checked + label, 
+#tense4:checked + label,
+#tense5:checked + label, 
+#tense6:checked + label, 
+#tense7:checked + label, 
+#tense8:checked + label, 
+#tense9:checked + label {
+   background-color: var(--color-secondaryDark);
+   color: white;
 }
 
-.select-checkbox > input {
-  height: 30px;
-  width: 30px;
-  margin: 0;
-}
-.select-checkbox > label {
-  text-transform: capitalize;
-}
-
-@media only screen and (max-width: 600px) {
-  .input-row > * {
-    font-size: 20px;
-    
-  }
-  .title {
-    font-size: 30px;
-    font-weight: 700;
-  }
-  * {
-    font-size: 18px;
-  }
-  .toggle-title {
-    font-size: 16px;
-  }
+#verb0:checked + label, 
+#verb1:checked + label, 
+#verb2:checked + label, 
+#verb3:checked + label, 
+#verb4:checked + label,
+#verb5:checked + label, 
+#verb6:checked + label, 
+#verb7:checked + label, 
+#verb8:checked + label, 
+#verb9:checked + label,
+#verb10:checked + label, 
+#verb11:checked + label, 
+#verb12:checked + label, 
+#verb13:checked + label, 
+#verb14:checked + label,
+#verb15:checked + label, 
+#verb16:checked + label, 
+#verb17:checked + label, 
+#verb18:checked + label, 
+#verb19:checked + label {
+   background-color: var(--color-primaryDark);
+   color: white;
 }

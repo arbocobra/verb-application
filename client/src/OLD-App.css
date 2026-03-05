@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  width: 100%;
+}
+h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin-left: 20px;
+}
+.title {
+  font-size: 36px;
+  font-weight: 700;
+}
+.subheading {
+  font-size: 24px;
+  font-weight: 500;
+}
+h3 {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+#App {
+  width: 100%;
+}
+#Verbs {
+  margin: 0 5%;
+}
+#Question {
+  min-height: 300px;
+}
+#Footer {
+  justify-content: space-between;
+}
+.selection-container {
+  max-height: 500px;
+  transition: max-height 0.5s;
+}
+.selection-container>div {
+  max-height: 500px;
+}
+.button.accent-key {
+  background-color: #f7f7f7;
+  border: 2px solid #d1d1d1;
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+}
+.accent-key:active {
+  background-color: #d1d1d1;
+}
+
+.select-container {
+  border: 1px solid #213547;
+}
+.question-wrap {
+  flex: 3 1 400px;
+}
+.hint-wrap {
+  flex: 0 1 300px;
+}
+.toggle-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.icon {
+  aspect-ratio: 1;
+}
+.input-row > * {
+  font-size: 30px;
+  font-weight: 500;
+  color: #213547;
+  display: flex;
+}
+.input-row > input {
+  border: 0;
+  background: #ebebeb;
+}
+
+.select-checkbox > input {
+  height: 30px;
+  width: 30px;
+  margin: 0;
+}
+.select-checkbox > label {
+  text-transform: capitalize;
+}
+
+@media only screen and (max-width: 600px) {
+  .input-row > * {
+    font-size: 20px;
+    
+  }
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  * {
+    font-size: 18px;
+  }
+  .toggle-title {
+    font-size: 16px;
+  }
+}
