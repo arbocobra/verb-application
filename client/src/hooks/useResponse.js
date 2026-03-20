@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-export const useQuestionResponse = (testindex) => {
+export const useResponse = (testindex, completeTest) => {
 
    const [count, setCount] = useState(0)
    const [results, setResults] = useState({ correct: [], incorrect: [] })
@@ -19,13 +19,16 @@ export const useQuestionResponse = (testindex) => {
          let updateResults = [...resultsRef.current.incorrect, correctValue]
          setResults({...results, incorrect: updateResults})
       }
-      // if (finalQuestion.current) completeTest()
       setCount(countRef.current + 1)
    }
 
    useEffect(() => {
       if (testindex.length > 0 && count == testindex.length - 1) setIsFinal(true)
    }, [count, testindex])
+
+   useEffect(() => {
+      if (isFinal) completeTest()
+   }, [isFinal, completeTest])
 
    return { count, results, isFinal, handleResponse }
 }

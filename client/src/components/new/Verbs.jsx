@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Selection from '@/components/Selection';
-// import Test from '@/components/Test';
-import { Test } from '@/app/components/new/TempFrames';
+import Test from '@/components/Test';
+// import { Test } from '@/app/components/new/TempFrames';
 
 const Verbs = () => {
 
@@ -11,7 +11,6 @@ const Verbs = () => {
 
    const updatePage = () => {
       setDisplayActive(true)
-      // console.log(tenseFilter, verbFilter)
    }
 
    const resetPage = () => {
@@ -21,8 +20,8 @@ const Verbs = () => {
    } 
 
    return (
-      <div id='Verbs' className='flex items-end h-full max-w-90'>
-         <div id='selection' className='flex flex-col h-9/10 bg-white rounded-3xl w-full p-5'>
+      <div id='Verbs' className='flex items-end h-full'>
+         <div id='selection' className='flex flex-col h-9/10 bg-white rounded-3xl w-full p-4'>
          { displayActive ? 
          <Test resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : 
          <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 

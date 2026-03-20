@@ -1,54 +1,18 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import { useSelection } from '@/app/hooks/useSelection';
 import Checkbox from '@/ui/Checkbox';
 import clsx from 'clsx';
 
 const SelectVerb = ({ verbFilter, setVerbFilter, display }) => {
-   const [isAllVerb, setIsAllVerb] = useState(true)
+   const {isAll:isAllVerb, handleCheckbox} = useSelection(setVerbFilter, verbFilter)
    const verbCheckboxRef = useRef(null)
    const verbSelection = ['amar (-AR)', 'beber (-ER)', 'decidir (-IR)', 'vir', 'dizer', 'ler', 'dar', 'estar', 'fazer', 'ir', 'ouvir', 'poder', 'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'pôr'];
 
-   const handleCheckbox = (e) => {
-      let val = e.target.value
-      let isSelected = e.target.checked
-      
-      if (val === 'all') {
-         const collection = verbCheckboxRef.current.getElementsByTagName('input');
-         selectAll(isSelected, collection)
-      } else {
-         selectOne(val, isSelected)
-      }
-   }
-
-   const selectAll = (isSelected, collection) => {
-      if (isSelected) {
-         setIsAllVerb(true)
-         setVerbFilter(['all'])
-         for (let i = 1; i < collection.length; i++) {
-            collection[i].checked = false
-         }
-      } else {
-         setIsAllVerb(false)
-         let updateFilter = [...verbFilter].filter(el => el !== 'all')
-         setVerbFilter(updateFilter)
-      }
-   }
-
-   const selectOne = (val, isSelected) => {
-      if (isSelected) {
-         let arr = [...verbFilter].filter(el => el !== 'all')
-         arr.push(val)
-         setIsAllVerb(false)
-         setVerbFilter(arr)
-      } else {
-         let arr = [...verbFilter].filter(el => el !== val)
-         setVerbFilter(arr)
-      }
-   }
-
    return (
-      <div className={clsx('select-container flex justify-center', {'h-105 overflow-y-auto':display}, {'h-0 overflow-y-hidden':!display})}>
-         <div className='grid grid-cols-2 grid-rows-10 gap-4 items-stretch justify-items-stretch' ref={verbCheckboxRef} >
-            <Checkbox index={0} type={'verb'} value={'all'} action={handleCheckbox} isChecked={isAllVerb} />
+      <div className={clsx('select-container flex justify-center', {'h-[calc(100%-175px)] overflow-y-auto':display}, {'h-0 overflow-y-hidden':!display})}>
+         {/* <div className='grid grid-cols-2 grid-rows-10 gap-4 items-stretch justify-items-stretch' ref={verbCheckboxRef} > */}
+         <div className='flex flex-col flex-wrap gap-2 items-center w-full' ref={verbCheckboxRef} >
+            <Checkbox index={0} type={'verb'} value={'all'} action={handleCheckbox} isChecked={isAllVerb} ref={verbCheckboxRef.current} />
             {verbSelection.map((verb, i) => (
                <Checkbox
                   key={`verb-${i + 1}`}

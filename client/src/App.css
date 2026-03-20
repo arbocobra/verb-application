@@ -9,13 +9,20 @@
   --color-primaryExtraLight: #eb5f7d;
   --color-primaryDark: #9e0325;
   --color-secondary: #05e2b2;
-  --color-secondaryLight: #37e7c1;
-  --color-secondaryExtraLight: #5febcd;
+  --color-secondaryLight: #5febcd;
+  --color-secondaryExtraLight: #79ebd3;
   --color-secondaryDark: #039e7c;
-  --color-tertiary: #ecc94b;
-  --color-tertiaryLight: #e7c137;
-  --color-tertiaryExtraLight: #ebcd5f;
+  --color-tertiary: #e7c137;
+  --color-tertiaryLight: #ebcd5f;
+  --color-tertiaryExtraLight: #ebd47c;
   --color-tertiaryDark: #e19a00;
+  --text-h-1: clamp(1.25rem, 3vh, 2.5rem);
+  --text-h-2: clamp(1rem, 2.5vh, 2rem);
+   --animate-shimmer: shimmer 1.2s infinite linear;
+   
+   @keyframes shimmer {
+      to { background-position-x: 0% }
+   }
 }
 
 #tense0:checked + label, 

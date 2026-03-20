@@ -1,108 +1,56 @@
-import { Suspense, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useQuestionFilter } from '@/hooks/useQuestionFilter';
-import { useQuestionResponse } from '@/hooks/useQuestionResponse';
+import { useResponse } from '@/hooks/useResponse';
 import Skeleton from '@/ui/Skeleton';
-import { PropagateLoader } from 'react-spinners';
-import { randomizeQuestionIndex, fetchFilteredData } from '@/functions/loadingFunctions';
 
 import Question from '@/components/Question';
 // import Results from './Results';
 import Footer from '@/components/Footer';
+import TestHeader from '@/components/TestHeader';
 
 
 const Test = ({ resetPage, tenseFilter, verbFilter }) => {
-   // const { resetPage, tenseFilter, verbFilter } = props
 
-   const { testQuestions, testIndexList } = useQuestionFilter(tenseFilter, verbFilter)
-   
-   // const [testIndexList, setTestIndexList] = useState([])
-   // const [testQuestions, setTestQuestions] = useState([])
-
-   // const [countIndex, setCountIndex] = useState(0)
+   const { testQuestions, testIndexList, isLoading } = useQuestionFilter(tenseFilter, verbFilter)
    const [testActive, setTestActive] = useState(true)
-   // const [results, setResults] = useState({ correct: [], incorrect: [] })
 
-   // const finalQuestion = useRef(false)
-   // const resultsRef = useRef(null)
-   // const countRef = useRef(0)
-
-   // const initializeRandomize = useRef(false)
-   // useEffect(() => {
-   //    let ignore = false
-   //    fetchFilteredData(tenseFilter, verbFilter)
-   //    .then(data => {
-   //       if (!ignore) setTestQuestions(data)
-   //    })
-   //    return () => ignore = true
-   // }, [tenseFilter, verbFilter])
- 
-   // useEffect(() => {
-   //    if (testQuestions.length > 0 && !initializeRandomize.current) {
-   //       initializeRandomize.current = true
-   //       const idArray = randomizeQuestionIndex(testQuestions)
-   //       setTestIndexList(idArray)
-   //    }
-   // }, [testQuestions])
-   
-   // resultsRef.current = { ...results}
-   // countRef.current = countIndex
-   // if (testIndexList.length > 0 && countIndex == testIndexList.length - 1) finalQuestion.current = true
-
-   // const handleResponse = (bool, correctValue) => {
-   //    if (bool) {
-   //       let updateResults = [...resultsRef.current.correct, correctValue]
-   //       setResults({...results, correct: updateResults})
-   //    } else {
-   //       let updateResults = [...resultsRef.current.incorrect, correctValue]
-   //       setResults({...results, incorrect: updateResults})
-   //    }
-   //    if (finalQuestion.current) completeTest()
-   //    setCountIndex(countRef.current + 1)
-   // }
-
-   // const completeTest = () => {
-   //    setTestActive(false)
-   // }
-
-   // const resetTest = () => {
-   //    setTestActive(false)
-   //    setResults({ correct: [], incorrect: [] })
-   //    setTestIndexList([])
-   //    setCountIndex(0)
-   //    setTestActive(false)
-   //    setTestQuestions([])
-   //    resetPage()
-   // }
-
-   // if (testActive && testQuestions.length && testIndexList.length) {
-   //    return (
-      //    <div className='h-full flex items-center'>
-
-      //    <Question display={true} index={countIndex} verb={testQuestions[testIndexList[countIndex]]} handleResponse={handleResponse} />
-      //    <Footer activeId={countIndex} testLength={testIndexList.length} completeTest={completeTest} /> 
-         
-      // </div>
-   // )} 
-   // else if (testActive) return <PropagateLoader/>
-   // else return <Results totalQuestions={testIndexList.length} resetTest={resetTest} results={results} />
+   const completeTest = () => { setTestActive(false) }
 
    if (testActive) {
-      return (
-         <Suspense fallback={<Skeleton/>}>
-            <TestComplete testQuestions={testQuestions} testIndexList={testIndexList} setTestActive={setTestActive} />
-            {/* <div className='h-full flex items-center'>
-               { testQuestions.length && testIndexList.length && <Question display={true} index={countIndex} verb={testQuestions[testIndexList[countIndex]]} handleResponse={handleResponse} />}
-               <Footer activeId={countIndex} testLength={testIndexList.length} completeTest={completeTest} /> 
-            </div> */}
-         </Suspense>
-      )
-   } else return <Skeleton />
-   // else return <Results totalQuestions={testIndexList.length} resetTest={resetTest} results={results} />
+      if (isLoading) return <Skeleton />
+      else {
+         return (
+            <div id='test' className='flex flex-col h-full'>
+               <TestInner testQuestions={testQuestions} testIndexList={testIndexList} completeTest={completeTest} />
+            </div>
+         )}
+   } else {
+      return <Results />
+   }
 }
 
-const TestComplete = ({testQuestions, testIndexList, setTestActive}) => {
+export const TempInner = ({ testIndexList, completeTest }) => {
+   const { count, results, isFinal, handleResponse } = useResponse(testIndexList, completeTest)
+
+   useEffect(() => {
+      if (count === 0) {
+         handleResponse(false, 'nós temos')
+      } else if (count === 1) {
+         handleResponse(true, 'eu leio')
+      } else if (count === 2) {
+         handleResponse(false, 'ele dá')
+      }
+      console.log(results, isFinal)
+   }, [count])
+
+   return (
+      <div></div>
+   )
+}
+
+const TestInner = ({ testQuestions, testIndexList, completeTest }) => {
    
-   const { count, results, isFinal, handleResponse } = useQuestionResponse(testIndexList)
+   const { count, results, isFinal, handleResponse } = useResponse(testIndexList, completeTest)
 
    // const [countIndex, setCountIndex] = useState(0)
    // const [results, setResults] = useState({ correct: [], incorrect: [] })
@@ -127,14 +75,12 @@ const TestComplete = ({testQuestions, testIndexList, setTestActive}) => {
    //    setCountIndex(countRef.current + 1)
    // }
 
-   const completeTest = () => {
-      setTestActive(false)
-   }
-
    return (
-      <div className='h-full flex items-center flex-col justify-center'>
-         { testQuestions.length && testIndexList.length && <Question display={true} index={count} verb={testQuestions[testIndexList[count]]} handleResponse={handleResponse} />}
-         <Footer activeId={count} testLength={testIndexList.length} completeTest={completeTest} /> 
+      <div id='test-inner' className='flex flex-col flex-1 justify-between'>
+         {/* { testQuestions.length && testIndexList.length && <Question display={true} index={count} verb={testQuestions[testIndexList[count]]} handleResponse={handleResponse} />} */}
+         <TestHeader />
+         <Question count={count} verb={testQuestions[testIndexList[count]]} handleResponse={handleResponse} />
+         <Footer count={count} total={testIndexList.length} completeTest={completeTest} /> 
       </div>
    )
 }
