@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import Selection from './Selection';
-import TestContainer from './TestContainer';
-import Header from './Header';
+import Selection from '@/components/Selection';
+import Test from '@/components/Test';
 
 const Verbs = () => {
-
    const [displayActive, setDisplayActive] = useState(false)
    const [tenseFilter, setTenseFilter] = useState(['all'])
    const [verbFilter, setVerbFilter] = useState(['all']) 
-
+   
    const updatePage = () => {
       setDisplayActive(true)
    }
@@ -20,9 +18,12 @@ const Verbs = () => {
    } 
 
    return (
-      <div id='Verbs' className='flex-column nowrap'>
-         <Header />
-         { displayActive ? <TestContainer resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
+      <div id='Verbs' className='flex items-end h-full'>
+         <div id='selection' className='flex flex-col h-9/10 bg-white rounded-3xl w-full p-3'>
+         { displayActive ? 
+         <Test resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : 
+         <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 
+         </div>
       </div>
    )
 }

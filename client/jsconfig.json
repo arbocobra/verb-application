@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "paths": {
+        "@/app/*": ["./*"],
+        "@/components/*": ["./components/*"],
+        "@/functions/*": ["./functions/*"],
+        "@/assets/*": ["./assets/*"],
+        "@/ui/*": ["./components/ui/*"],
+        "@/hooks/*": ["./hooks/*"],
+      }
+    }
+  }

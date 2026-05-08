@@ -1,16 +1,15 @@
 // App.js
 import React from 'react';
-import Verbs from './components/Verbs';
 import './App.css'
-import './Style.css'
+import Home from '@/components/Home'
 
 const App = () => {
 
   return (
-    <div id='App'>
-      <Verbs />
+    <div id='App' className='h-dvh w-dvw overflow-hidden'>
+      <Home />
     </div>
-  );
+  )
 };
 
 export default App;

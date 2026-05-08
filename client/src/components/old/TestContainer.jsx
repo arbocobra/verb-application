@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { PropagateLoader } from 'react-spinners';
-import { randomizeQuestionIndex, fetchFilteredData } from './../functions/loadingFunctions';
+import { randomizeQuestionIndex, fetchFilteredData } from '../../functions/loadingFunctions';
 
 import Question from './Question';
 import Results from './Results';
