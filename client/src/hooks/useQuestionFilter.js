@@ -22,6 +22,11 @@ export const useQuestionFilter = (tenseFilter, verbFilter) => {
 
    }, [tenseFilter, verbFilter]);
 
+   const clearQuestions = () => {
+      setTestIndexList([])
+      setTestQuestions([])
+   }
+
    useEffect(() => {
       if (testQuestions.length > 0) {
          const idArray = randomizeQuestionIndex(testQuestions);
@@ -32,5 +37,5 @@ export const useQuestionFilter = (tenseFilter, verbFilter) => {
       }
    }, [testQuestions]);
 
-   return { testQuestions, testIndexList, isLoading };
+   return { testQuestions, testIndexList, clearQuestions, isLoading };
 };

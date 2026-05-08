@@ -14,12 +14,21 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
             '@/app': path.resolve(__dirname, 'src/'),
-            '@/components': path.resolve(__dirname, 'src/components/new'),
+            '@/components': path.resolve(__dirname, 'src/components'),
             '@/functions': path.resolve(__dirname, 'src/functions'),
             '@/assets': path.resolve(__dirname, 'src/assets'),
-            '@/ui': path.resolve(__dirname, 'src/components/new/ui'),
+            '@/ui': path.resolve(__dirname, 'src/components/ui'),
             '@/hooks': path.resolve(__dirname, 'src/hooks')
         }
       }
    };
 });
+
+/**
+ * "@/app/*": ["./src/*"],
+        "@/components/*": ["./src/components/new/*"],
+        "@/functions/*": ["./src/functions/*"],
+        "@/assets/*": ["./src/assets/*"],
+        "@/ui/*": ["./src/components/new/ui/*"],
+        "@/hooks/*": ["./src/hooks/*"],
+ */

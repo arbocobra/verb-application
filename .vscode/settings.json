@@ -1,6 +1,8 @@
 {
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "files.associations": {
+    "App.css": "tailwindcss"
+  },
   "files.exclude": {
     "**/flutter/ephemeral": true,
     "**/Flutter/ephemeral": true,

@@ -1,67 +1,29 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import { useSelection } from '@/hooks/useSelection';
+import Checkbox from '@/ui/Checkbox';
+import clsx from 'clsx';
 
-const SelectVerb = (props) => {
-   const {verbFilter, setVerbFilter, toggleAccordion} = props
-
-   const [isAllVerb, setIsAllVerb] = useState(true)
+const SelectVerb = ({ verbFilter, setVerbFilter, display }) => {
+   const {isAll:isAllVerb, handleCheckbox} = useSelection(setVerbFilter, verbFilter)
    const verbCheckboxRef = useRef(null)
-   const verbSelection = useRef(['amar (-AR)', 'beber (-ER)', 'decidir (-IR)', 'vir', 'dizer', 'ler', 'dar', 'estar', 'fazer', 'ir', 'ouvir', 'poder', 'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'pôr'])
-
-   const handleCheckbox = (e) => {
-      let val = e.target.value
-      let isSelected = e.target.checked
-      
-      if (val === 'all') {
-         selectAll(isSelected, verbCheckboxRef.current.children)       
-      } else {
-         selectOne(val, isSelected)
-      }
-   }
-
-   const selectAll = (isSelected, collection) => {
-      if (isSelected) {
-         setIsAllVerb(true)
-         setVerbFilter(['all'])
-         for (let i = 1; i < collection.length; i++) {
-            collection[i].firstChild.checked = false
-         }
-      } else {
-         setIsAllVerb(false)
-         let updateFilter = [...verbFilter].filter(el => el !== 'all')
-         setVerbFilter(updateFilter)
-      }
-   }
-
-   const selectOne = (val, isSelected) => {
-      if (isSelected) {
-         let arr = [...verbFilter].filter(el => el !== 'all')
-         arr.push(val)
-         setIsAllVerb(false)
-         setVerbFilter(arr)
-      } else {
-         let arr = [...verbFilter].filter(el => el !== val)
-         setVerbFilter(arr)
-      }
-   }
+   const verbSelection = ['amar (-AR)', 'beber (-ER)', 'decidir (-IR)', 'vir', 'dizer', 'ler', 'dar', 'estar', 'fazer', 'ir', 'ouvir', 'poder', 'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'pôr'];
 
    return (
-      <div className='select-container p-10'>
-         <div onClick={toggleAccordion}>
-            <h2 className='subheading'>Select Verbs to Practice</h2>
-         </div>
-         <div className='selection-container closed'>
-            <div className='p-010 flex-column wrap g-10' ref={verbCheckboxRef}>
-               <div className='select-checkbox h-30 flex-row middle left g-10'>
-                  <input type='checkbox' id='verb0' value='all' onChange={handleCheckbox} checked={isAllVerb} />
-                  <label htmlFor='verb0'> All</label>
-               </div>
-               {verbSelection.current.map((tense,i) => (
-                  <div className='select-checkbox h-30 flex-row middle left g-10' key={`checkbox${i}`}>
-                     <input type='checkbox' id={`verb${i + 1}`} value={tense} onChange={handleCheckbox} />
-                     <label htmlFor={`verb${i + 1}`}>{tense}</label>
-                  </div>
-               ))}
-            </div>
+      <div className={clsx('select-container flex justify-center', {'h-[67%] overflow-y-auto':display}, {'h-0 overflow-y-hidden':!display})}>
+         {/* <div className='grid grid-cols-2 grid-rows-10 gap-4 items-stretch justify-items-stretch' ref={verbCheckboxRef} > */}
+         {/* <div className='flex flex-col flex-wrap gap-2 w-full' ref={verbCheckboxRef} > */}
+         <div className='w-full grid grid-cols-[repeat(auto-fit,minmax(25%,1fr))] gap-2' ref={verbCheckboxRef} >
+            <Checkbox index={0} type={'verb'} value={'all'} action={handleCheckbox} isChecked={isAllVerb} ref={verbCheckboxRef.current} />
+            {verbSelection.map((verb, i) => (
+               <Checkbox
+                  key={`verb-${i + 1}`}
+                  index={i + 1}
+                  type={'verb'}
+                  value={verb}
+                  action={handleCheckbox}
+                  isChecked={false}
+               />
+            ))}
          </div>
       </div>
    )

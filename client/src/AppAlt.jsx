@@ -1,14 +1,12 @@
-import Home from '@/components/Home'
-import './App.css'
+import Verbs from './components/old/Verbs';
+import './Style.css'
 
 const AppAlt = () => {
    return (
-      
-         <div id='App' className='h-dvh w-dvw overflow-hidden'>
-            <Home />
-         </div>
-
-   )
+    <div id='App'>
+      <Verbs />
+    </div>
+  );
 }
 
 export default AppAlt;

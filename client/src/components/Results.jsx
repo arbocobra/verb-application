@@ -1,31 +1,26 @@
-const Results = (props) => {
-   const { totalQuestions, resetTest, results } = props
+import { ResultDropdown } from '@/components/ui/ResultDropdown';
 
-   const answeredCount = results.correct.length + results.incorrect.length
-   const correctCount = results.correct.length
-   const incorrectCount = results.incorrect.length
-   const incorrectAnswers = results.incorrect
+const Results = ({results, length, handleReset}) => {
+
+   const correctBar = Math.round(results.correct.length / length * 100);
+   const incorrectBar = 100 - Math.round(results.correct.length / length * 100);
 
    return (
-      <div id='Results'>
-         <div className='flex-column g-20 bottom-40'>
-            <div className='flex-column g-10'>
-               <h2 className='subheading'>Test Score</h2>
-               <p>Questions Answered: {`${answeredCount}/${totalQuestions}`}</p>
-               <p>Correct: {correctCount}</p>
-               <p>Incorrect: {incorrectCount}</p>
+      <div className='flex flex-col flex-1 w-full gap-4 py-5'>
+         <div className='flex w-full basis-6'>
+            <div style={{width:correctBar + '%'}} className='flex py-0.5 pl-2 text-sm font-bold bg-secondary justify-start text-black rounded-tl-md rounded-bl-md'>
+               {results.correct.length}
             </div>
-            <div>
-               Incorrect Conjugations:
-               <ul>
-                  {incorrectAnswers.map((verb, i) => (<li key={i}>{verb}</li>))}
-               </ul>
+            <div style={{width:incorrectBar + '%'}} className='flex py-0.5 pr-2 text-sm font-bold bg-primary justify-end text-white rounded-tr-md rounded-br-md'>
+               {results.incorrect.length}
             </div>
          </div>
-         <div>
-            <div className='flex-row'>
-               <div className='button simple' onClick={resetTest}>Restart</div>
-            </div>
+         <div className='flex flex-col w-full basis-100 flex-1 overflow-y-auto gap-4'>
+            {results.correct && <ResultDropdown openState={false} results={results.correct} isCorrect={true} />}
+            {results.incorrect && <ResultDropdown openState={true} results={results.incorrect} isCorrect={false} />} 
+         </div>
+         <div className='flex w-full basis-10 justify-center items-center'>
+            <div onClick={handleReset} className='bg-tertiary p-2 font-bold w-1/2 text-center'>Restart?</div>
          </div>
       </div>
    )
