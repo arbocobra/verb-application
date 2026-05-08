@@ -18,6 +18,7 @@
   --color-tertiaryDark: #e19a00;
   --text-h-1: clamp(1.25rem, 3vh, 2.5rem);
   --text-h-2: clamp(1rem, 2.5vh, 2rem);
+  --text-h-3: clamp(.5rem, 2vh, 1.5rem);
    --animate-shimmer: shimmer 1.2s infinite linear;
    
    @keyframes shimmer {

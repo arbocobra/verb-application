@@ -1,18 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuestionFilter } from '@/hooks/useQuestionFilter';
 import { useResponse } from '@/hooks/useResponse';
+import { useResults } from '@/app/hooks/useResults';
 import Skeleton from '@/ui/Skeleton';
 
 import Question from '@/components/Question';
-// import Results from './Results';
+import Results from '@/components/Results';
 import Footer from '@/components/Footer';
-import TestHeader from '@/components/TestHeader';
+import Header from '@/components/TestHeader';
 
 
 const Test = ({ resetPage, tenseFilter, verbFilter }) => {
 
    const { testQuestions, testIndexList, isLoading } = useQuestionFilter(tenseFilter, verbFilter)
-   const [testActive, setTestActive] = useState(true)
+   const [testActive, setTestActive] = useState(true);
+   const {results, updateResults } = useResults();
+   // const [results, setResults] = useState({ correct: [], incorrect: [] })
+   // const finalResults = ()
 
    const completeTest = () => { setTestActive(false) }
 
@@ -21,11 +25,11 @@ const Test = ({ resetPage, tenseFilter, verbFilter }) => {
       else {
          return (
             <div id='test' className='flex flex-col h-full'>
-               <TestInner testQuestions={testQuestions} testIndexList={testIndexList} completeTest={completeTest} />
+               <TestInner testQuestions={testQuestions} testIndexList={testIndexList} completeTest={completeTest} updateResults={updateResults} />
             </div>
          )}
    } else {
-      return <Results />
+      return <Results results={results} length={testQuestions.length} />
    }
 }
 
@@ -48,9 +52,9 @@ export const TempInner = ({ testIndexList, completeTest }) => {
    )
 }
 
-const TestInner = ({ testQuestions, testIndexList, completeTest }) => {
+const TestInner = ({ testQuestions, testIndexList, completeTest, updateResults }) => {
    
-   const { count, results, isFinal, handleResponse } = useResponse(testIndexList, completeTest)
+   const { count, handleResponse } = useResponse(testIndexList, completeTest, updateResults)
 
    // const [countIndex, setCountIndex] = useState(0)
    // const [results, setResults] = useState({ correct: [], incorrect: [] })
@@ -78,7 +82,7 @@ const TestInner = ({ testQuestions, testIndexList, completeTest }) => {
    return (
       <div id='test-inner' className='flex flex-col flex-1 justify-between'>
          {/* { testQuestions.length && testIndexList.length && <Question display={true} index={count} verb={testQuestions[testIndexList[count]]} handleResponse={handleResponse} />} */}
-         <TestHeader />
+         <Header />
          <Question count={count} verb={testQuestions[testIndexList[count]]} handleResponse={handleResponse} />
          <Footer count={count} total={testIndexList.length} completeTest={completeTest} /> 
       </div>

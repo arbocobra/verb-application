@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useSelection } from '@/app/hooks/useSelection';
 import Checkbox from '@/ui/Checkbox';
 import clsx from 'clsx';
@@ -20,8 +20,10 @@ const SelectTense = ({ tenseFilter, setTenseFilter, display }) => {
    ];
 
    return (
-      <div className={clsx('select-container flex justify-center', {'h-105 overflow-y-auto':display}, {'h-0 overflow-y-hidden':!display})}>
-         <div className='grid grid-cols-2 grid-rows-5 gap-4 items-stretch justify-items-stretch' ref={tenseCheckboxRef} >
+      <div className={clsx('select-container flex justify-center', {'h-[67%] overflow-y-auto':display}, {'h-0 overflow-y-hidden':!display})}>
+         {/* <div className='grid grid-cols-2 grid-rows-5 gap-4 items-stretch justify-items-stretch' ref={tenseCheckboxRef} > */}
+         {/* <div className='flex flex-col flex-wrap gap-2 w-full' ref={tenseCheckboxRef} > */}
+         <div className='w-full grid grid-cols-[repeat(2,minmax(40%,1fr))] gap-3' ref={tenseCheckboxRef} >
             <Checkbox index={0} type={'tense'} value={'all'} action={handleCheckbox} isChecked={isAllTense} ref={tenseCheckboxRef.current} />
             {tenseSelection.map((tense, i) => (
                <Checkbox

@@ -4,7 +4,7 @@ import './App.css'
 const AppAlt = () => {
    return (
       
-         <div id='App'>
+         <div id='App' className='h-dvh w-dvw overflow-hidden'>
             <Home />
          </div>
 

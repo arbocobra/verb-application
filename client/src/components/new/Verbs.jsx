@@ -21,7 +21,7 @@ const Verbs = () => {
 
    return (
       <div id='Verbs' className='flex items-end h-full'>
-         <div id='selection' className='flex flex-col h-9/10 bg-white rounded-3xl w-full p-4'>
+         <div id='selection' className='flex flex-col h-9/10 bg-white rounded-3xl w-full p-3'>
          { displayActive ? 
          <Test resetPage={resetPage} tenseFilter={tenseFilter} verbFilter={verbFilter} /> : 
          <Selection updatePage={updatePage} tenseFilter={tenseFilter} setTenseFilter={setTenseFilter} verbFilter={verbFilter} setVerbFilter={setVerbFilter} /> } 

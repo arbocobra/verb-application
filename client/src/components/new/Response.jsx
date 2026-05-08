@@ -17,6 +17,7 @@ const Response = ({verb, handleSubmit, displayKeyboard, updateDisplay}) => {
       const clearCaps = val.toLowerCase()
       handleSubmit(clearCaps)
       clearText(inputRef.current)
+      // displayKeyboard={displayKeyboard}
    }
 
    return (

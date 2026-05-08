@@ -13,11 +13,11 @@ const Checkbox = ({index, type, value, action, isChecked, ref}) => {
          { value == 'all' ? 
          <input type='checkbox' id={id} value={value} onChange={onSelect} className='hidden' checked={isChecked} /> : 
          <input type='checkbox' id={id} value={value} onChange={onSelect} className='hidden' /> }
-         <label htmlFor={id} className={clsx('flex justify-center items-center rounded-lg min-h-6 border w-15 px-1',
+         <label htmlFor={id} className={clsx('flex justify-center items-center rounded-lg min-h-6 border min-w-fit px-1',
             {'bg-secondaryLight border-secondaryExtraLight hover:bg-secondaryExtraLight': type == 'tense'}, 
             {'bg-primaryLight border-primaryExtraLight hover:bg-primaryExtraLight text-white': type == 'verb'})}>
-            <div className="block">
-               <div className="w-full capitalize font-medium">{value}</div>
+            <div className='block'>
+               <div className='w-full capitalize font-medium text-h-3'>{value}</div>
             </div>
          </label>
       </>

@@ -33,5 +33,7 @@ export const useDropdownDisplay = () => {
       }
    }, [displayHintB])
 
+   // const hideAllDropdown = () => {}
+
    return { displayKeyboard, displayHintA, displayHintB, updateDisplay }
 }

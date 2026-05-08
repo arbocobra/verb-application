@@ -1,34 +1,30 @@
 import { useState, useEffect, useRef } from 'react';
 
-export const useResponse = (testindex, completeTest) => {
+export const useResponse = (testindex, completeTest, updateResults) => {
 
    const [count, setCount] = useState(0)
-   const [results, setResults] = useState({ correct: [], incorrect: [] })
    const [isFinal, setIsFinal] = useState(false)
-
-   const resultsRef = useRef(null)
    const countRef = useRef(0)
 
    const handleResponse = (bool, correctValue) => {
-      resultsRef.current = { ...results}
-      countRef.current = count
-      if (bool) {
-         let updateResults = [...resultsRef.current.correct, correctValue]
-         setResults({...results, correct: updateResults})
-      } else {
-         let updateResults = [...resultsRef.current.incorrect, correctValue]
-         setResults({...results, incorrect: updateResults})
+      updateResults(bool, correctValue)
+      if (isFinal) completeTest()
+      else {
+         countRef.current = count
+         setCount(countRef.current + 1)
       }
-      setCount(countRef.current + 1)
    }
 
    useEffect(() => {
-      if (testindex.length > 0 && count == testindex.length - 1) setIsFinal(true)
+      if (testindex.length > 0 && count == testindex.length - 1) {
+         console.log('final question reached')   
+         setIsFinal(true)
+      }
    }, [count, testindex])
 
-   useEffect(() => {
-      if (isFinal) completeTest()
-   }, [isFinal, completeTest])
+   // useEffect(() => {
+   //    if (isFinal) completeTest()
+   // }, [isFinal, completeTest])
 
-   return { count, results, isFinal, handleResponse }
+   return { count, handleResponse }
 }

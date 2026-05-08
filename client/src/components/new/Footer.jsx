@@ -4,13 +4,12 @@ const Footer = ({count, total, completeTest}) => {
    return (
       <div id='test-footer' className='flex p-2 bg-secondary rounded-b-2xl shadow-md shadow-black/20'>
          <div className='grid grid-cols-[auto_1fr_50px] flex-1 h-8 gap-4 items-center px-1'>
-            <div className='font-bold text-sm'>{count} / {total}</div>
+            <div className='font-bold text-sm'>{count + 1} / {total}</div>
             <ProgressBar progress={progress} />
             <div onClick={completeTest} className='flex flex-wrap place-content-center p-2 bg-primary text-sm/[14px] text-white font-medium rounded-xl cursor-pointer'>Exit</div>
          </div>
       </div>
    )
-
 }
 
 const ProgressBar = ({progress}) => {
